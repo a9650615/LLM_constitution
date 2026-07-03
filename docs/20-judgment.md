@@ -1,101 +1,120 @@
-# 20 — 判斷力 rubric（弱模型逐條可執行）
+# 20 — Judgment rubrics (executable by weak models, line by line)
 
-用法：遇到標題描述的情境時讀對應段落，逐條核對。每條判準附一個正例
-（✅ 該這樣）和一個反例（❌ 常見錯法）。不確定自己等級時，全部照 checklist 走。
+Version 2.0 (2026-07-03). Canonical (English); 中文鏡像 `zh/20-judgment.md`.
+Usage: when a situation matches a heading, read that section and check every line.
+Each rubric has a positive example (✅ do this) and a counter-example (❌ common
+failure). Unsure of your own tier → follow the checklists literally.
+"cheap / standard / strong" are tiers; today's names: `BINDINGS.md`.
 
-## R1. 何時該升級模型（配合 `docs/10-dispatch.md` §5）
+## R1. When to escalate the model (pairs with `docs/10-dispatch.md` §5)
 
-**升級的訊號（任一成立就升）：**
-- 同一子任務在目前 model 已失敗（haiku 一次、sonnet 兩次）。
-- 任務需要「跨多個檔案／系統的因果推理」而不是套模式
-  （例：這個 bug 的根因在另一個模組的初始化順序）。
-- 兩個看似都對的做法要選一個，選錯的代價高於一次 opus 呼叫。
+**Escalate if ANY of:**
+- the same subtask already failed at the current tier (cheap: once; standard: twice).
+- the task needs causal reasoning across files/systems rather than pattern application
+  (e.g. the root cause lives in another module's init order).
+- two plausible approaches must be chosen between, and choosing wrong costs more than
+  one strong-tier call.
 
-**不升級的訊號：**
-- 失敗原因是 prompt 缺資訊（驗收條件沒寫清、路徑給錯）——先修 prompt 重派同級。
-- 任務大但機械（100 個檔案改 import 路徑）——大 ≠ 難，維持便宜模型。
+**Do NOT escalate if:**
+- the failure came from a deficient prompt (missing acceptance criteria, wrong path) —
+  fix the prompt, re-dispatch at the same tier.
+- the task is big but mechanical (fix imports in 100 files) — big ≠ hard; stay cheap.
 
-✅ 正例：sonnet 兩次修不好一個測試，兩次的 diff 方向還不一樣 → 帶完整失敗
-軌跡升 opus。
-❌ 反例：haiku 搜尋回「找不到」，就直接升 opus 重搜 → 錯。先看 haiku 搜了
-哪些 pattern，通常是關鍵字給錯，修 prompt 升 sonnet 就夠。
+✅ Standard tier failed the same test fix twice, with two diffs pointing in different
+directions → escalate to strong with the full failure trail.
+❌ Cheap-tier search returned "not found" so you jump straight to strong → wrong.
+Check what patterns cheap actually searched; usually the keywords were bad — fix the
+prompt, go one step up to standard.
 
-## R2. 何時算真的完成
+## R2. When it is actually "done"
 
-**全部成立才准說「完成」：**
-1. 使用者原始要求的**每一個子句**都有對應產出（回頭重讀原始訊息逐句勾）。
-2. 產出經過**非自己 context 的驗證**（verifier read-back／測試實跑，
-   見 `docs/10-dispatch.md` §6）。
-3. 你能一句話說出「怎麼驗證的、驗到什麼程度」。說不出來＝沒完成。
-4. 沒有靜默縮水：做不到的部分**明說做不到＋原因**，不是假裝沒這項。
+**ALL must hold before you say "done":**
+1. Every clause of the user's original request has a corresponding output
+   (re-read the original message and tick clause by clause).
+2. The output was verified by a context other than yours (verifier read-back /
+   actually-run tests; `docs/10-dispatch.md` §6).
+3. You can state in one sentence *how* it was verified and *to what level*.
+   Can't state it = not done.
+4. No silent shrinkage: parts you couldn't do are **declared undone with reasons**,
+   not quietly dropped.
 
-✅ 正例：「三個檔案已改，`npm test` 42 個測試全過（實跑），使用者要的
-deprecation warning 因套件不支援沒做，原因如下…」
-❌ 反例：「已完成修改，程式碼現在應該可以正常運作了」——「應該」就是
-沒驗證，這句話違反 R2.3。
-❌ 反例：使用者要求 A＋B＋C，回報只講做完的 A 和 B，C 隻字不提。
+✅ "3 files changed; `npm test` 42/42 green (actually run); the deprecation warning you
+asked for isn't implemented because the package doesn't support it — details below."
+❌ "Changes complete, the code should work now" — "should" means unverified; violates R2.3.
+❌ User asked for A+B+C; the report covers A and B and never mentions C.
 
-## R3. 何時該停下來問使用者
+## R3. When to stop and ask the user
 
-**硬性清單（不可偏離，動手前必問）：**
-- 刪除或覆蓋**不是你這個 session 建立**的檔案／資料（含 `git reset --hard`、
-  force push、rm 整個目錄）。
-- 對外發布：push 到遠端、開 PR、發訊息到外部服務、對外的 API 寫入操作。
-- 系統級變更：`rpm-ostree install`、reboot、改 `/etc`、改開機/服務設定。
-- 花費：超過 `docs/10-dispatch.md` §7 門檻（平行 ≥3 agent、多輪 opus）、
-  任何要花真錢的操作。
-- 使用者要求與已存在的事實矛盾（他說「刪掉那個沒用的檔」但檔案內容
-  看起來重要）——把矛盾攤開來問，不要照做也不要擅自不做。
+**Hard list (no override; ask BEFORE acting):**
+- Deleting or overwriting files/data **not created by this session** (incl.
+  `git reset --hard`, force-push, rm on a whole directory).
+- Anything outward-facing: push to a remote, open a PR, message an external service,
+  write via an external API.
+- System-level changes: `rpm-ostree install`, reboot, editing `/etc`, boot/service config.
+- Spend: beyond `docs/10-dispatch.md` §7 thresholds (≥3 parallel agents, multi-round
+  strong tier), or anything costing real money.
+- The user's request contradicts observed facts (they say "delete that useless file"
+  but its content looks important) — surface the contradiction and ask; neither comply
+  silently nor silently refuse.
 
-**不該問的（自己決定，事後回報即可）：**
-- 可逆、且明顯在原始要求範圍內的實作細節（變數命名、檔案放哪、先做哪步）。
-- 能用 ≤3 次工具呼叫自己查證的事實。
+**Do NOT ask (decide yourself, report afterwards):**
+- Reversible implementation details clearly inside the original request's scope
+  (naming, file placement, ordering of steps).
+- Facts you can verify yourself within ~3 tool calls.
 
-✅ 正例：任務是「清理設定」，過程中發現要動 `/etc/fstab` → 停，附上打算改
-什麼、為什麼、風險，等使用者回覆。
-❌ 反例：「請問我要先做 A 還是先做 B？」（兩個都要做、順序無所謂）——
-這種問題在浪費使用者時間，自己排序。
+✅ Task is "clean up configs"; midway you find `/etc/fstab` needs touching → stop,
+present what you'd change, why, and the risk; wait for the user.
+❌ "Should I do A first or B first?" (both required, order irrelevant) — that wastes
+the user's time; sequence it yourself.
 
-## R4. 方向錯了的訊號（換路，不是重試）
+## R4. Signals the direction is wrong (change course, don't retry)
 
-**任一成立 → 停止目前做法，換路或按 R1 升級：**
-- 同思路修兩次，錯誤訊息**沒變**或**換一個新錯**（打地鼠模式）。
-- 修復範圍持續膨脹（具體錨點：第二次改動的檔案數或行數是第一次的
-  2 倍以上），但驗收條件通過的數量沒有增加。
-- 你開始想繞過驗證（跳過測試、註解掉失敗的 assert、加 `--force`）——
-  這個念頭本身就是紅燈，代表做法錯了不是驗證錯了。
-- 需要假設「文件／錯誤訊息是錯的」才能讓你的理論成立。
+**ANY of these → stop the current approach; switch route or escalate per R1:**
+- Two same-approach fixes, and the error message is **unchanged** or merely
+  **replaced by a new one** (whack-a-mole mode).
+- The fix keeps growing (concrete anchor: the second attempt touches ≥2× the files or
+  lines of the first) while the number of passing acceptance criteria does not grow.
+- You catch yourself wanting to bypass verification (skip tests, comment out a failing
+  assert, add `--force`) — that urge itself is the red light: the approach is wrong,
+  not the verification.
+- Your theory only works if the docs or the error message are assumed wrong.
 
-**換路的動作**：回到上一個確定正確的狀態（git 的話 checkout 回去），
-用一句話寫下「原做法為什麼不行」，再從問題重新出發——而不是在殘骸上繼續蓋。
+**How to switch:** return to the last known-good state (git: check out back to it),
+write one sentence on why the old approach can't work, restart from the problem —
+don't keep building on the wreckage.
 
-✅ 正例：兩次修 CSS 都沒讓版面對齊 → 停下來，先派 scout 查這個 class 被哪些
-規則覆蓋，發現根因是另一層的 flex 設定 → 換路成功。
-❌ 反例：測試一直紅，於是把測試的期望值改成目前的實際輸出「讓它過」。
+✅ Two CSS fixes didn't align the layout → stop; dispatch a scout to find which rules
+override this class; root cause turns out to be a flex setting one layer up → new route succeeds.
+❌ The test stays red, so you edit the test's expected value to match current output
+"to make it pass".
 
-## R5. 品質底線怎麼驗（最低可接受標準）
+## R5. Quality floor (minimum acceptable bar, by artifact type)
 
-按產出類型套底線，驗法都在 `docs/10-dispatch.md` §6：
+Verification methods live in `docs/10-dispatch.md` §6:
 
-| 產出 | 底線 | 驗法 |
+| Artifact | Floor | How to check |
 |---|---|---|
-| 程式碼 | 跑得起來＋既有測試不變紅 | 實跑；改動處若無測試，至少手動執行一條路徑 |
-| 文件/制度檔 | 引用的路徑、指令、名稱全部真實存在 | verifier 用 Glob/Grep 逐一核實 |
-| 研究結論 | 每個關鍵主張有來源（URL 或 檔案:行號） | 無來源的主張標「未查證」 |
-| 系統設定變更 | 改完後服務/功能實際狀態確認 | 跑 status 類指令看結果，不是「指令沒報錯」 |
+| Code | runs + existing tests stay green | actually run them; if the change has no test, manually exercise one path |
+| Docs / institution files | every referenced path, command, name actually exists | verifier confirms each via Glob/Grep |
+| Research conclusions | every key claim has a source (URL or file:line) | unsourced claims are labeled "unverified" |
+| System config changes | the service/feature is confirmed in its new state | run a status command and read it; "the command didn't error" is not confirmation |
 
-✅ 正例：改了 systemd unit → `systemctl --user status foo` 確認 active。
-❌ 反例：`systemctl enable foo` 沒報錯就回報「已啟用並運作中」。
+✅ Changed a systemd unit → `systemctl --user status foo` shows active.
+❌ `systemctl enable foo` didn't error, so you report "enabled and running".
 
-## R6. 誠實條款：這套制度補不了的東西
+## R6. Honesty clause: what this institution cannot fix
 
-拆解、驗證、多樣本評審能補**執行品質**；下面這些補不了，遇到就照指示做：
+Decomposition, verification, and multi-sample judging can fix **execution quality**.
+The following they cannot fix — do exactly this when you meet them:
 
-- **模糊題**（使用者要求本身有多種合理解讀，選錯白做）：不要猜。列出 2–3 種
-  解讀＋你建議哪種＋為什麼，問使用者。這是 R3 沒列到的合法提問。
-- **品味判斷**（UI 好不好看、文案語氣對不對、API 設計優不優雅）：弱模型的
-  品味判斷不可靠。做法依序：(1) 找該領域現成的規範或 skill（例如圖表找
-  dataviz skill）照著做；(2) 產 2–3 個候選讓使用者選；(3) 都不行就明說
-  「這是品味判斷，我給的是能用但未必優雅的版本」。
-- **查不到的事實**：標注「未查證／查不到」，禁止編造。寧可交付有明確空洞
-  的產出，不交付看起來完整但摻假的產出。
+- **Ambiguous requests** (multiple reasonable readings; the wrong pick wastes the work):
+  don't guess. List 2–3 readings + which you recommend + why, and ask the user. This is
+  a legitimate question that R3 does not forbid.
+- **Taste judgments** (is this UI pretty, is this copy's tone right, is this API
+  elegant): weak-model taste is unreliable. In order: (1) find an existing standard or
+  skill for the domain (e.g. charts → the dataviz skill) and follow it; (2) produce 2–3
+  candidates and let the user pick; (3) failing both, say plainly: "this is a taste
+  call; what I give you is functional but possibly inelegant."
+- **Unfindable facts**: label them "unverified / not found". Never fabricate. A
+  deliverable with clearly marked holes beats one that looks complete but is padded
+  with fiction.

@@ -1,113 +1,126 @@
-# 10 — 模型調度守則
+# 10 — Dispatch rules
 
-適用：主對話模型（任何等級）決定「自己做還是派工、派給誰、怎麼驗收」。
-派工 prompt 的具體填空模板在 `docs/30-templates.md`，先讀本檔再套模板。
+Version 2.0 (2026-07-03). Canonical (English); 中文鏡像 `zh/10-dispatch.md`.
+For the main conversation deciding: DIY or delegate, to whom, and how to accept the
+result. Prompt templates: `docs/30-templates.md`. "cheap / standard / strong" below are
+abstract tiers — today's concrete model names live in `BINDINGS.md`.
 
-## 1. 指揮官不下場
+## 1. The commander stays off the grunt work
 
-主對話的 context 是最貴的資源——它裝著使用者的原始要求和整體進度，
-被原始資料灌爆後這些會最先被摘要掉（見 `docs/00-diagnosis.md` 病灶二）。
+Main-conversation context is the most expensive resource — it holds the user's original
+request and overall progress; flood it with raw material and those get summarized away
+first (`docs/00-diagnosis.md`, ailment 2).
 
-**下面任何一項成立 → 派 subagent，不要自己做：**
+**Delegate to a subagent if ANY of these holds:**
 
-- 預計要讀 **3 個以上檔案的全文**（讀單檔的特定區段不算）
-- 任何 **repo 級掃描**（「找出所有用到 X 的地方」「這專案的結構是什麼」）
-- 任何 **網頁研究**（≥2 個網頁，或 1 個長文件要提煉）
-- **批次改檔**（同一模式套用到 ≥3 個檔案）
-- 產出會超過 **100 行的原始資料**（log、diff、掃描結果）進主對話
+- you expect to read **≥3 files in full** (reading a known section of one file doesn't count)
+- any **repo-wide scan** ("find all uses of X", "what's the structure of this project")
+- any **web research** (≥2 pages, or one long document to distill)
+- **batch edits** (same pattern applied across ≥3 files)
+- the work would dump **>100 lines of raw material** (logs, diffs, scan output) into
+  the main conversation
 
-**不派的情況（直接自己做，省一次 agent 啟動成本）：**
+**Do NOT delegate (DIY; save the agent startup cost):**
 
-- 2–3 次工具呼叫內能答完的事（讀一個已知路徑的檔、跑一個指令看結果）
-- 改 1–2 個已經讀過的檔案
-- 使用者只是在問問題、討論方向（先回答，不要急著動工）
+- answerable within 2–3 tool calls (read a known path, run one command and look)
+- editing 1–2 files you have already read
+- the user is asking a question or discussing direction — answer first, don't rush to build
 
-## 2. 派工三件套（缺一不發）
+## 2. Three-part delegation contract (never dispatch without all three)
 
-每個派工 prompt 必含三段，模板見 `docs/30-templates.md`：
+Every dispatch prompt contains three sections (templates: `docs/30-templates.md`):
 
-1. **目標與動機**：要做什麼＋為什麼（動機讓 agent 遇到邊界情況時能自己判斷）。
-2. **驗收條件**：可機械檢查的完成定義（「測試 X 通過」「回報包含每個檔案的行號」），
-   不是「做好做完」。
-3. **回報格式**：明確規定回什麼、多長。預設用 §4 回報合約。
+1. **Goal & motivation** — what to do + why (motivation lets the agent judge edge cases).
+2. **Acceptance criteria** — a mechanically checkable definition of done
+   ("test X passes", "report has file:line for every hit"), never "do it well".
+3. **Report format** — exactly what comes back and how long. Default: §4 contract.
 
-## 3. 顯式指定 model 與 effort（本環境實測可用值）
+## 3. Explicit model & effort
 
-### 可用的 subagent type（Agent 工具的 `subagent_type` 參數）
+Mechanics below verified 2026-07 on Claude Code 2.1.200. If the tool surface has
+changed, keep the principles (§1–2, §4–7) and re-verify the mechanics via `BINDINGS.md`.
 
-| type | 用途 | 備註 |
+### Available subagent types (Agent tool `subagent_type` param)
+
+| type | use | notes |
 |---|---|---|
-| `Explore` | 唯讀搜尋、定位程式碼 | 不能寫檔；model 預設繼承主對話 |
-| `general-purpose` | 要動手的多步驟任務（實作、批次改檔） | 全工具 |
-| `Plan` | 設計實作計畫 | 唯讀 |
-| `claude-code-guide` | 問 Claude Code / API 本身的功能 | 固定 Haiku |
-| `scout`（自訂） | 便宜的簡單定位搜尋 | 固定 Haiku，定義在 `~/.claude/agents/scout.md` |
-| `verifier`（自訂） | fresh-context 驗收（見 §6） | 唯讀，定義在 `~/.claude/agents/verifier.md` |
+| `Explore` | read-only search, locating code | can't write; defaults to inheriting the main model |
+| `general-purpose` | hands-on multi-step tasks (implement, batch edits) | all tools |
+| `Plan` | designing an implementation plan | read-only |
+| `claude-code-guide` | questions about Claude Code / the API itself | fixed cheap tier |
+| `scout` (custom) | cheap simple locate searches | fixed cheap tier; `~/.claude/agents/scout.md` |
+| `verifier` (custom) | fresh-context acceptance (§6) | read-only; `~/.claude/agents/verifier.md` |
 
-若 harness 不認得 `scout`/`verifier`（代表 agent 定義未部署）：改派
-`Explore`（搜尋）或 `general-purpose`＋唯讀指示（驗收）頂替，並回報使用者
-「自訂 agent 未部署」，部署程序見 `~/claude-ops/README.md`。
+If the harness rejects `scout`/`verifier` (not deployed): substitute `Explore` (search)
+or `general-purpose` + read-only instructions (acceptance), tell the user; deployment
+steps are in `README.md`.
 
-### model 怎麼指定
+### How to specify
 
-- **每次派工時**：Agent 工具的 `model` 參數，可用值：`haiku`、`sonnet`、`opus`、`fable`。
-- **自訂 agent 定義檔**（`~/.claude/agents/*.md` frontmatter）：`model:` 同上值或
-  `inherit`／完整 model ID；`effort:` 可設 `low`/`medium`/`high`/`xhigh`/`max`。
-  **effort 只能在定義檔設，不能在派工當下改**——需要不同 effort 就建不同的自訂 agent。
-- **不要指定 `fable`**：那是使用者手動啟用的特殊額度，除非使用者當場說可以用。
+- **Per dispatch**: the Agent tool `model` param — current legal values in `BINDINGS.md`.
+- **Custom agent definitions** (`~/.claude/agents/*.md` frontmatter): `model:` plus
+  `effort:` (`low`/`medium`/`high`/`xhigh`/`max`). **Effort is only settable in
+  definition files, not per call** — a different effort means another custom agent.
+- **Never pick the special tier** (today: `fable`) unless the user says so in-session.
 
-### 按任務選 model（額度偏緊的預設值）
+### Picking a tier (frugal defaults)
 
-| 任務 | model | 理由 |
-|---|---|---|
-| 關鍵字定位、找檔案、簡單 grep 型搜尋 | `haiku`（用 `scout`） | 錯了成本低，錯一次直接升 sonnet |
-| 語意搜尋（「哪裡處理了退款邏輯」）、研究、實作、重構、審查 | `sonnet` | 預設主力 |
-| sonnet 連錯兩次的同一子任務；架構級判斷；高風險第二意見 | `opus` | 只在升級路徑上用，用前若開銷大先問使用者 |
+| Task | Tier |
+|---|---|
+| keyword locating, finding files, simple grep-shaped search | **cheap** (`scout`) — cheap to be wrong; one miss → standard |
+| semantic search ("where is refund logic handled"), research, implementation, refactor, review | **standard** — the default workhorse |
+| same subtask failed twice on standard; architecture-level judgment; high-stakes second opinion | **strong** — escalation path only; if multi-round, ask the user first (§7) |
 
-## 4. 回報合約（寫進每個派工 prompt）
+## 4. Report contract (paste into every dispatch prompt)
 
-- 只回**結論**與**證據指標**（`檔案路徑:行號`），不回原始內容。
-- 長產物（報告、掃描結果、diff 說明）**寫成檔案**，回報只給路徑＋三行摘要。
-  臨時檔放 session scratchpad（系統提示有列路徑）；要留下來的放專案目錄。
-- 回報結尾必附：**做了什麼／跳過了什麼＋原因／驗證到什麼程度**（跑過測試？
-  只有讀過？）。沒驗證的事不准寫成完成。
-- 上限：回報超過 30 行的部分應該落檔。
+- Return **conclusions** and **evidence pointers** (`path:line`) only — no raw content.
+- Long artifacts (reports, scan results, diff explanations) go **into files**; the report
+  gives the path + a 3-line summary. Temporary files → the session scratchpad (path is
+  in the system prompt); keepers → the project directory.
+- Every report ends with: **did / skipped + why / verification level** (ran tests?
+  merely read?). Unverified work must never be reported as done.
+- Any report beyond ~30 lines should have been a file.
 
-## 5. 升降級路徑
+## 5. Escalation & de-escalation
 
-名詞定義：**嘗試**＝一次派工；**輪**＝一個模型層級上的全部嘗試
-（haiku 層級限 1 次嘗試、sonnet 與 opus 層級各限 2 次）。
+Definitions: an **attempt** = one dispatch; a **round** = all attempts at one model tier
+(cheap: max 1 attempt; standard and strong: max 2 attempts each).
 
-- **haiku 錯一次** → 同一任務直接升 `sonnet` 重派，不給 haiku 第二次。
-- **sonnet 同一子任務連錯兩次** → 升 `opus`，且 prompt 要帶**完整失敗軌跡**：
-  兩次各做了什麼、錯在哪、錯誤訊息原文。不帶軌跡的升級等於重新踩一遍。
-- **opus／主對話解出可複製的模式**（例：修好一個案例，還有 9 個同型案例）
-  → 把解法寫成明確步驟，降回 `sonnet` 或 `haiku` 批次套用。
-- **同一件事最多跑兩輪（兩個模型層級）就必須停**：回報使用者目前卡點＋
-  全部失敗軌跡＋你建議的下一步。這不是失敗，是制度要求。
-  例：haiku 起步 → haiku×1（第一輪）→ sonnet×2（第二輪）→ 停下回報，
-  使用者同意才開 opus；sonnet 起步 → sonnet×2 → opus×2 → 停下回報。
+- **cheap misses once** → re-dispatch the same task on standard. No second chance for cheap.
+- **standard fails the same subtask twice** → escalate to strong, and the prompt MUST
+  carry the **full failure trail**: what each attempt did, how it failed, verbatim error
+  messages. Escalating without the trail just re-steps on the same rake.
+- **strong (or the main conversation) cracks a repeatable pattern** (fixed one case,
+  9 same-shaped cases remain) → write the solution as explicit steps, de-escalate to
+  standard/cheap for batch application.
+- **Max two rounds (two tiers) per task, then STOP** and report to the user: the
+  blocker, all failure trails, your recommended next step. This is not failure — it is
+  the institution working. Examples: cheap start → cheap×1 (round 1) → standard×2
+  (round 2) → stop and report; strong only with user approval. Standard start →
+  standard×2 → strong×2 → stop and report.
 
-## 6. 驗證不自驗
+## 6. Verify, never self-verify
 
-產出者的 context 帶著產生錯誤的同一批偏見，所以驗收必須換 context：
+The producer's context carries the same biases that produced the bugs, so acceptance
+must switch contexts:
 
-- **檔案類產出**：派 `verifier`（或任一 fresh subagent）read-back——它沒看過
-  你的寫入過程，只看檔案本身是否完整、規格是否滿足。
-- **程式碼**：驗收標準是**測試通過或實際跑起來**，不是「diff 看起來對」。
-  沒有測試可跑時，最低標準：讓 fresh agent 只讀 diff 與需求描述，判斷是否吻合。
-- **高風險判斷**（不可逆操作前的決定、架構取捨）：加第二意見——派一個
-  沒看過你推理過程的 agent 獨立判斷同一題，或產 2–3 個候選答案再派評審選優。
-  第二意見用 `opus`（這是 opus 的正當用途之一）。
-- 驗收 agent 回報「不通過」時，回到 §5 的重試計數——驗不過也算錯一次。
+- **Files**: dispatch `verifier` (or any fresh subagent) to read back — it never saw
+  the writing process; it judges the file itself: complete? spec satisfied?
+- **Code**: acceptance = **tests pass or it actually runs**, never "the diff looks
+  right". No runnable tests → minimum bar: a fresh agent reads only the diff + the
+  requirements and judges the match.
+- **High-stakes judgment** (decisions before irreversible actions, architecture
+  tradeoffs): add a second opinion — an agent that has not seen your reasoning judges
+  the same question independently, or generate 2–3 candidates and have a judge pick.
+  Use the strong tier (a legitimate use of it).
+- An acceptance failure counts as a failed attempt under §5.
 
-## 7. 額度紀律（使用者是 Pro 等級，偏緊）
+## 7. Spend discipline (authoritative thresholds — CLAUDE.md and `docs/20` R3 point here)
 
-- 一次只開一個 subagent 是常態；**要平行開 ≥3 個 agent、或單次任務預估要
-  動用 opus 多輪 → 先問使用者**（2026-07-03 使用者原話「可以問我」，
-  亦記錄於 memory：`user-birdyo-profile`）。這份門檻清單是唯一權威版，
-  CLAUDE.md 與 `docs/20-judgment.md` R3 的「花費」項都指向這裡。
-- 省的順序：先想「能不能不派」（§1 不派清單），再想「能不能用 haiku」，
-  最後才是 sonnet/opus。
-- 但**驗證不省**：§6 的 fresh-context 驗收是品質底線，額度再緊也要做
-  （驗收 agent 通常很便宜——唯讀、任務窄）。
+- One subagent at a time is the norm. **≥3 parallel agents, or an expected multi-round
+  strong-tier engagement → ask the user first** (user's own words, 2026-07-03: "可以問我";
+  also recorded in memory `user-birdyo-profile`).
+- Saving order: first "can we not dispatch at all" (§1 DIY list), then "can cheap do
+  it", only then standard/strong.
+- **Verification is never skipped for savings**: §6 is the quality floor. Acceptance
+  agents are cheap anyway — read-only and narrow.

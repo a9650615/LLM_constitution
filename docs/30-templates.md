@@ -1,95 +1,106 @@
-# 30 — 派工 prompt 模板
+# 30 — Delegation prompt templates
 
-用法：先按 `docs/10-dispatch.md` §1 確認該派、§3 選好 subagent type 與 model，
-再抄對應模板填空。`{…}` 是必填空格；整段模板貼進 Agent 工具的 `prompt` 參數。
-每個模板已內建三件套（目標與動機／驗收條件／回報格式），不要刪段落。
+Version 2.0 (2026-07-03). Canonical (English); 中文鏡像 `zh/30-templates.md`.
+Usage: first confirm delegation is warranted (`docs/10-dispatch.md` §1) and pick the
+subagent type + tier (§3), then copy the matching template and fill the `{…}` blanks.
+Paste the whole block into the Agent tool `prompt` param. Each template already embeds
+the three-part contract (goal & motivation / acceptance criteria / report format) —
+do not delete sections. Tier→model bindings: `BINDINGS.md`.
 
-通用規則（適用所有模板）：
-- 回報中的長產物落檔傳路徑（臨時檔放 scratchpad，要保留的放 `{專案目錄}`）。
-- 回報結尾必附「做了什麼／跳過什麼＋原因／驗證到什麼程度」。
-
----
-
-## T1. 搜尋／定位（type: `scout`＋model haiku；語意型改 `Explore`＋sonnet）
-
-```
-【目標】在 {目錄或 repo 路徑} 找出 {要找的東西}。
-【動機】我接下來要 {為什麼找它}，所以重點是 {位置/用法/全部出現處}。
-【範圍】只搜 {目錄}；已知線索：{關鍵字、檔名模式、相關術語}。
-【驗收條件】
-- 每個結果附 檔案路徑:行號。
-- 找不到時列出你搜過的 pattern 與目錄（至少 3 組變體，含大小寫/同義詞）。
-【回報格式】結果清單（每行一筆：路徑:行號＋一句話說明），總長 ≤15 行。
-不要貼原始碼內容。
-```
-
-## T2. 實作（type: `general-purpose`，model sonnet）
-
-```
-【目標】在 {專案路徑} 實作 {功能描述}。
-【動機】{這功能給誰用、解決什麼問題}——邊界情況按這個動機自行判斷。
-【現況】相關檔案：{路徑清單＋每個檔一句話說明}。既有慣例：{命名/測試/風格}。
-【範圍】只准動這些檔案：{清單}。發現需要動其他檔案 → 停下來回報，不要動。
-【驗收條件】
-- {具體行為：輸入 X 得到 Y}
-- 跑 `{測試指令}` 全綠（實跑，不是推測）。
-- 程式風格與周圍程式碼一致（註解密度、命名慣例）。
-【回報格式】改了哪些檔（路徑:行號範圍）、測試輸出最後 5 行、
-跳過什麼＋原因、驗證程度。≤20 行。
-```
-
-## T3. 重構（type: `general-purpose`，model sonnet）
-
-```
-【目標】把 {範圍} 從 {現狀} 重構為 {目標形態}。
-【動機】{為什麼值得重構}。
-【鐵律】重構＝行為不變。任何外部可見行為的改變都是 bug，發現「順便想修」
-的問題只回報不修。
-【範圍】只准動：{檔案清單}。
-【驗收條件】
-- 重構前先跑 `{測試指令}` 記錄基準（幾個過幾個跳過），重構後結果完全相同。
-- 沒有測試覆蓋的部分：列出哪些改動未被測試保護，標注風險。
-【回報格式】基準測試結果 vs 重構後結果（並列）、改動清單（路徑＋一句話）、
-未受保護的改動清單。≤20 行。
-```
-
-## T4. 研究（type: `general-purpose` 或 `Explore`，model sonnet；純網頁研究也用 general-purpose）
-
-```
-【目標】回答：{具體問題}。
-【動機】我要用答案來 {做什麼決定}，所以請針對 {決策相關的面向} 深入，
-無關面向略過。
-【來源要求】優先 {官方文件/repo 原始碼/指定網站}。每個關鍵主張附來源
-（URL 或 檔案:行號）。查不到的明標「未查證」，禁止推測補洞。
-【驗收條件】
-- 直接回答問題（第一段就是答案，不是背景鋪陳）。
-- 若答案是「取決於情況」，列出判斷分支＋每支的條件。
-【回報格式】完整報告寫到 {檔案路徑}；回報只給：答案摘要 ≤5 行＋報告路徑＋
-信心程度（高/中/低＋原因）。
-```
-
-## T5. 審查（type: `verifier`；程式碼審查可另派 general-purpose sonnet）
-
-```
-【目標】驗收 {產出描述}，對照下列驗收條件逐條判定。
-【背景】只給你需求本身，不給產出過程——請用檔案與實跑結果獨立判斷。
-需求原文：{使用者原始要求，逐字貼}。
-【檢查對象】{檔案路徑清單 或 diff 範圍 或 指令}。
-【驗收條件】
-1. {條件一，可機械判定}
-2. {條件二}
-3. 引用的路徑/指令/名稱全部真實存在（用 Glob/Grep 核實）。
-【回報格式】第一行總判定（通過/不通過）；每條件一行：判定＋證據
-（檔案:行號 或 指令輸出關鍵行）；「無法驗證」單獨列出＋還缺什麼。
-只描述問題，禁止動手修。
-```
+Rules common to all templates:
+- Long artifacts go to files, report the path (temp → scratchpad; keepers → `{project dir}`).
+- Every report ends with: did / skipped + why / verification level.
 
 ---
 
-## 常見錯誤（派工前自查）
+## T1. Search / locate (type: `scout`, cheap tier; semantic search → `Explore`, standard)
 
-- ❌ 驗收條件寫「品質良好」「正確運作」——不可機械判定，等於沒寫。
-- ❌ 沒給範圍，agent 順手重構了半個 repo。
-- ❌ 忘了寫「找不到／做不到時怎麼回報」，agent 硬湊答案。
-- ❌ 把兩個獨立任務塞進一個 agent（搜尋＋實作合併派）——拆開，
-  搜尋結果先回主對話判斷過再派實作。
+```
+[Goal] In {directory or repo path}, find {the thing}.
+[Motivation] I will next {why it matters}, so what counts is {location / usage / every occurrence}.
+[Scope] Search only {dirs}. Known leads: {keywords, filename patterns, related terms}.
+[Acceptance criteria]
+- Every hit comes with file path:line.
+- If nothing is found, list the patterns and directories you tried
+  (≥3 variants: case, synonyms, spelling).
+[Report format] Hit list, one per line: path:line + one-sentence description.
+≤15 lines total. Do not paste source content.
+```
+
+## T2. Implement (type: `general-purpose`, standard tier)
+
+```
+[Goal] In {project path}, implement {feature description}.
+[Motivation] {who uses this, what problem it solves} — judge edge cases against this.
+[Current state] Relevant files: {paths + one sentence each}. Existing conventions: {naming/tests/style}.
+[Scope] Touch ONLY these files: {list}. If another file needs changing, stop and
+report — do not touch it.
+[Acceptance criteria]
+- {concrete behavior: input X yields Y}
+- `{test command}` fully green (actually run, not inferred).
+- Style matches surrounding code (comment density, naming conventions).
+[Report format] Files changed (path:line ranges), last 5 lines of test output,
+skipped + why, verification level. ≤20 lines.
+```
+
+## T3. Refactor (type: `general-purpose`, standard tier)
+
+```
+[Goal] Refactor {scope} from {current shape} to {target shape}.
+[Motivation] {why this is worth doing}.
+[Iron rule] Refactor = behavior unchanged. Any externally visible behavior change is a
+bug. Problems you feel like "fixing while here": report them, don't fix them.
+[Scope] Touch only: {file list}.
+[Acceptance criteria]
+- Run `{test command}` BEFORE starting and record the baseline (passed/skipped counts);
+  after refactoring, results must be identical.
+- For parts without test coverage: list which changes are unprotected, note the risk.
+[Report format] Baseline vs post-refactor test results (side by side), change list
+(path + one sentence), list of unprotected changes. ≤20 lines.
+```
+
+## T4. Research (type: `general-purpose` or `Explore`, standard tier)
+
+```
+[Goal] Answer: {concrete question}.
+[Motivation] The answer feeds {which decision}, so go deep on {decision-relevant
+aspects} and skip the rest.
+[Source requirements] Prefer {official docs / repo source / named sites}. Every key
+claim carries a source (URL or file:line). Unfindable → mark "unverified"; no
+speculation to fill holes.
+[Acceptance criteria]
+- The first paragraph IS the answer (no background windup).
+- If the answer is "it depends", list the branches + the condition for each.
+[Report format] Full report written to {file path}; the reply gives only: answer
+summary ≤5 lines + report path + confidence (high/medium/low + why).
+```
+
+## T5. Review / acceptance (type: `verifier`; code review may also use `general-purpose`, standard)
+
+```
+[Goal] Accept/reject {artifact description} against the criteria below, item by item.
+[Background] You get the requirements only, not the production process — judge
+independently from files and actual runs.
+Original request, verbatim: {paste the user's words}.
+[Objects] {file paths / diff range / commands}.
+[Acceptance criteria]
+1. {criterion 1, mechanically checkable}
+2. {criterion 2}
+3. Every referenced path/command/name actually exists (verify via Glob/Grep).
+[Report format] Line 1: overall verdict (pass / fail). One line per criterion:
+verdict + evidence (file:line or key output line). "Unverifiable" items listed
+separately + what would be needed. Describe problems only — do NOT fix anything.
+```
+
+---
+
+## Pre-dispatch self-check (common failures)
+
+- ❌ Acceptance criteria like "good quality", "works correctly" — not mechanically
+  checkable, same as writing nothing.
+- ❌ No scope given; the agent refactors half the repo as a side effect.
+- ❌ Forgot to specify "what to report when not found / not doable"; the agent
+  fabricates to have something to say.
+- ❌ Two independent tasks in one agent (search + implement fused) — split them;
+  search results return to the main conversation for judgment before implementation
+  is dispatched.

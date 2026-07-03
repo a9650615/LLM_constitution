@@ -1,63 +1,106 @@
-# 40 — 維護協議：怎麼安全地更新這套制度
+# 40 — Maintenance protocol: how to update this institution safely
 
-讀者：未來任何等級的模型。這套檔案的價值在於「穩定累積」，
-最大的風險是被好意的修改慢慢改爛（退化模式見 `docs/90-letter.md`）。
+Version 2.0 (2026-07-03). Canonical (English); 中文鏡像 `zh/40-maintenance.md`.
+Audience: future models of any tier. The value of these files is *stable accumulation*;
+the biggest risk is well-meaning edits slowly ruining them (degradation modes:
+`docs/90-letter.md`).
 
-## 1. 改之前：備份
+## 1. Before editing: snapshot
 
-改 `~/claude-ops/` 底下任何既有檔案前，先：
+`~/claude-ops` is a git repo. Before editing any existing file here:
+
+```bash
+cd ~/claude-ops && git add -A && git commit -m "pre-edit snapshot" -q
+```
+
+After the edit passes verification (§5), commit again with a real message describing
+the change. If git is somehow unavailable, fall back to:
 
 ```bash
 mkdir -p ~/claude-ops/backups
-cp "{檔案路徑}" ~/claude-ops/backups/"{檔名}.$(date +%Y%m%d-%H%M%S).bak"
+cp "{file}" ~/claude-ops/backups/"{name}.$(date +%Y%m%d-%H%M%S).bak"
 ```
 
-`backups/` 超過 20 個檔案時，刪最舊的（只刪 `.bak`，這是唯一免問的刪除）。
+(`backups/` >20 files → delete the oldest `.bak` files; the only deletion that needs
+no asking.)
 
-## 2. 權限分級
+## 2. Permission levels
 
-### 可以自行改（改完派 verifier read-back，事後回報使用者即可）
+### You may change on your own (verifier read-back after; tell the user afterwards)
 
-- **往 `LESSONS.md` 追加**新教訓（格式見 §3）。這是最常見也最歡迎的維護。
-- **修正已被證實錯誤的事實**：引用的路徑失效、指令改名、環境變了
-  （例：proxy 換 port）。條件：附上驗證證據（實跑輸出），改動只限該事實本身。
-- **模板加填空格或範例**（`docs/30-templates.md`），不動既有段落結構。
+- **Appending** a new lesson to `LESSONS.md` (format: §3). The most common and most
+  welcome maintenance.
+- **Fixing facts proven wrong**, anywhere: a referenced path is dead, a command was
+  renamed, the environment changed (e.g. proxy moved ports). Condition: attach the
+  verification evidence (actual command output); change only that fact.
+- **Updating `BINDINGS.md`** when reality has moved (new model names, changed tool
+  surface) — that file exists precisely to absorb this rot. Bump its "last verified"
+  date; keep evidence.
+- **Adding blanks or examples to templates** (`docs/30-templates.md`) without touching
+  existing section structure.
 
-### 動之前要先問使用者（把「現行內容 → 提議內容 ＋ 理由」攤開來問）
+### Ask the user first (present: current text → proposed text + reason)
 
-- 改或刪 CLAUDE.md 的**核心三律**、`docs/20-judgment.md` R3 的**硬性清單**。
-- 改 `docs/10-dispatch.md` 的**門檻數字**（幾個檔案要派工、重試幾次、
-  model 預設值）——這些是刻意校準過的，單一 session 的體驗不足以推翻。
-- **刪除**任何規則（追加限制不用問，放寬要問）。
-- 改動全域 `~/.claude/CLAUDE.md` 或 `~/.claude/agents/`（影響所有 session）。
-- 大規模重組檔案結構。
+- Changing or deleting the **three core laws** (CLAUDE.md) or the **hard ask-first
+  list** (`docs/20-judgment.md` R3).
+- Changing **threshold numbers** in `docs/10-dispatch.md` (files-before-delegating,
+  retry counts, tier defaults) — these were deliberately calibrated; one session's
+  experience is not enough to overturn them.
+- **Deleting** any rule (adding restrictions needs no asking; loosening does).
+- Changing the global `~/.claude/CLAUDE.md` or `~/.claude/agents/` (affects every session).
+- Large-scale restructuring of the file layout.
 
-## 3. 踩坑教訓寫回哪裡、什麼格式
+## 3. Where lessons go, in what format
 
-**機器/環境相關的坑** → 追加到 `~/claude-ops/LESSONS.md`，格式：
+**Machine/environment pitfalls** → append to `~/claude-ops/LESSONS.md`:
 
 ```markdown
-## L{編號}. {一句話結論}（{YYYY-MM-DD}）
-- 情境：做什麼時踩到的
-- 錯法：當時做了什麼、什麼症狀
-- 對法：正確做法（可直接照抄的指令或步驟）
+## L{n}. {one-sentence takeaway} ({YYYY-MM-DD})
+- Situation: what you were doing
+- Wrong way: what was tried, what the symptom was
+- Right way: the correct steps (copy-pasteable commands if possible)
 ```
 
-**使用者偏好、跨專案的長期事實** → 寫 memory（系統提示的 memory 機制），
-不要塞 LESSONS.md。**單一 repo 的坑** → 寫該 repo 自己的 CLAUDE.md，不要塞這裡。
+New entries preferably in English (cheaper tokens); Chinese acceptable — format
+matters more than language.
 
-## 4. 什麼時候精簡
+**User preferences & long-lived cross-project facts** → memory (the harness memory
+mechanism), not LESSONS.md. **Single-repo pitfalls** → that repo's own CLAUDE.md,
+not here.
 
-- `LESSONS.md` 超過 **40 條或 250 行** → 提議精簡：重複的合併、
-  已過時的刪除、反覆出現的教訓「升格」寫進對應的 docs 檔（升格後原條目刪除）。
-  精簡屬於「刪規則」，要先問使用者。
-- 各 docs 檔超過 **250 行** → 同上提議精簡。
-- CLAUDE.md（master）**永遠保持一頁內**（≤80 行）：新內容進 docs/，
-  CLAUDE.md 只加路由行。
+## 4. When to compact
 
-## 5. 改完之後
+- `LESSONS.md` over **40 entries or 250 lines** → propose compaction: merge
+  duplicates, delete obsolete ones, "promote" recurring lessons into the matching
+  docs/ file (then delete the originals). Compaction deletes rules → ask the user first.
+- Any docs/ file over **250 lines** → same: propose compaction to the user.
+- `CLAUDE.md` (master) stays within **one page (≤80 lines)** forever: new content
+  goes into docs/, CLAUDE.md gets only a routing line.
 
-1. 派 `verifier` read-back：檔案完整、引用的路徑與名稱仍全部真實存在。
-2. 在回報裡告訴使用者改了什麼（一行即可）。
-3. 若改的是會影響其他檔案引用的內容（改檔名、改段落編號），
-   用 Grep 掃 `~/claude-ops/` 把所有引用一起更新。
+## 5. After editing
+
+1. Dispatch `verifier` for a read-back: file complete; every referenced path and name
+   still actually exists.
+2. Tell the user what changed (one line is enough).
+3. If the change affects cross-references (renamed file, renumbered section), Grep
+   `~/claude-ops/` and update every reference in the same session.
+4. Commit (§1).
+
+## 6. Language policy (canonical vs mirror)
+
+- **Canonical = the English files**: `CLAUDE.md`, `docs/10–40`, `BINDINGS.md`,
+  `AGENTS.md`. Every content edit lands here first. On any conflict, English wins.
+- **`zh/` mirrors** exist for the user's reading. After editing a canonical file,
+  update its mirror in the same session if quick; otherwise just bump the canonical
+  version stamp — the mirror header names the version it mirrors, so lag stays
+  visible. **Never edit a zh mirror alone.** A session may regenerate any mirror from
+  the canonical file on request.
+- `docs/00-diagnosis.md` and `docs/90-letter.md` are archival Chinese: append-only
+  (handoff notes), never translated, never rewritten.
+
+## 7. Version stamps
+
+Every canonical file's header carries `Version: X.Y (date)`. Bump on every content
+edit (Y+1 for fixes/additions; X+1 for structural change, ask-user class). Mirrors
+carry "mirrors en vX.Y" in their header. A mirror whose number lags its canonical is
+stale by definition — trust the English file.

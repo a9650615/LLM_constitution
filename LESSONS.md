@@ -1,6 +1,7 @@
-# LESSONS — 本機踩坑紀錄
+# LESSONS — machine pitfall log 本機踩坑紀錄
 
-追加格式見 `docs/40-maintenance.md` §3。改系統設定、裝軟體前先掃一眼這裡。
+Append format: `docs/40-maintenance.md` §3. Scan this before sysadmin or install
+work. New entries preferably in English (cheaper tokens); existing zh entries stay.
 
 ## L1. Bazzite 上不能用 dnf 裝套件（2026-07-03）
 - 情境：需要安裝任何 CLI 工具或系統套件時
