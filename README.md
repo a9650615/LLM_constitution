@@ -17,6 +17,7 @@ canonical (cheaper tokens); `zh/` holds Chinese mirrors for the user.
 | `BINDINGS.md` | perishable bindings: tier→model names, effort mechanics, budget, local model roster, agent wiring |
 | `AGENTS.md` | the seven-rule constitution for non-Claude agents (aider/OpenCode/goose and local models — Qwen/Gemma/DeepSeek, see BINDINGS.md) |
 | `docs/10-dispatch.md` | dispatch rules: delegate-vs-DIY, tiers, escalation ladder, verify-never-self-verify, spend discipline |
+| `docs/15-token-economy.md` | context hygiene for the main conversation: reading/output/tool-call discipline, long-context checkpointing, what never to economize |
 | `docs/20-judgment.md` | judgment rubrics R1–R6 with positive/counter examples |
 | `docs/30-templates.md` | delegation prompt templates ×5 (search/implement/refactor/research/review) |
 | `docs/40-maintenance.md` | maintenance protocol: git snapshots, permission levels, lesson format, compaction, language policy, version stamps |

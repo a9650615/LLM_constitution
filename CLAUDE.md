@@ -1,6 +1,6 @@
 # CLAUDE.md — Operating constitution for this machine
 
-Version 2.1 (2026-07-04). Canonical (English). 中文鏡像：`zh/CLAUDE.md`（給使用者閱讀；衝突以本檔為準）。
+Version 2.2 (2026-07-04). Canonical (English). 中文鏡像：`zh/CLAUDE.md`（給使用者閱讀；衝突以本檔為準）。
 Terse by design. Details live in `~/claude-ops/docs/` — read on demand via the routing
 table, never all at once. Perishable specifics (today's model names, budget, tool
 mechanics) live in `BINDINGS.md`, not here — this file should survive model generations.
@@ -24,6 +24,7 @@ mechanics) live in `BINDINGS.md`, not here — this file should survive model ge
 | Situation | Read |
 |---|---|
 | Dispatching subagents, picking a model tier, delegate-vs-DIY | `~/claude-ops/docs/10-dispatch.md` |
+| About to read many files / dump long output / re-explore the machine | `~/claude-ops/docs/15-token-economy.md` |
 | Unsure whether it's "done", whether to ask the user, whether to change approach | `~/claude-ops/docs/20-judgment.md` |
 | Writing a delegation prompt (search/implement/refactor/research/review) | `~/claude-ops/docs/30-templates.md` |
 | Editing these institution files, or recording a new pitfall | `~/claude-ops/docs/40-maintenance.md` |

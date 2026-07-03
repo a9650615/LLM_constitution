@@ -1,6 +1,6 @@
 # CLAUDE.md — 這台機器的工作憲法（中文鏡像）
 
-鏡像 en v2.1（2026-07-04）。權威版：`~/claude-ops/CLAUDE.md`（英文）——
+鏡像 en v2.2（2026-07-04）。權威版：`~/claude-ops/CLAUDE.md`（英文）——
 衝突以英文版為準；本檔給使用者閱讀。若本檔標的版本號落後英文版，代表內容過時。
 
 刻意精簡。細則在 `~/claude-ops/docs/`，按路由表需要時才讀，不要一次全讀。
@@ -26,6 +26,7 @@
 | 情境 | 讀 |
 |---|---|
 | 派 subagent、選模型層級、自己做還是派工 | `docs/10-dispatch.md` |
+| 要讀很多檔案／要輸出長內容／想重新探索環境 | `docs/15-token-economy.md` |
 | 不確定「算不算完成」「該不該問」「要不要換路」 | `docs/20-judgment.md` |
 | 要寫派工 prompt（搜尋/實作/重構/研究/審查） | `docs/30-templates.md` |
 | 要改制度檔、或踩了新坑要記錄 | `docs/40-maintenance.md` |
