@@ -1,6 +1,6 @@
 # 10 — Dispatch rules
 
-Version 2.0 (2026-07-03). Canonical (English); 中文鏡像 `zh/10-dispatch.md`.
+Version 2.1 (2026-07-04). Canonical (English); 中文鏡像 `zh/10-dispatch.md`.
 For the main conversation deciding: DIY or delegate, to whom, and how to accept the
 result. Prompt templates: `docs/30-templates.md`. "cheap / standard / strong" below are
 abstract tiers — today's concrete model names live in `BINDINGS.md`.
@@ -87,9 +87,12 @@ Definitions: an **attempt** = one dispatch; a **round** = all attempts at one mo
 (cheap: max 1 attempt; standard and strong: max 2 attempts each).
 
 - **cheap misses once** → re-dispatch the same task on standard. No second chance for cheap.
-- **standard fails the same subtask twice** → escalate to strong, and the prompt MUST
-  carry the **full failure trail**: what each attempt did, how it failed, verbatim error
-  messages. Escalating without the trail just re-steps on the same rake.
+- **standard fails the same subtask twice** → escalate to strong **only if standard
+  was your first tier** (strong is then round 2). The prompt MUST carry the **full
+  failure trail**: what each attempt did, how it failed, verbatim error messages.
+  Escalating without the trail just re-steps on the same rake. If a cheaper tier
+  already used round 1, do NOT self-escalate — the two-round cap applies: stop and
+  ask the user.
 - **strong (or the main conversation) cracks a repeatable pattern** (fixed one case,
   9 same-shaped cases remain) → write the solution as explicit steps, de-escalate to
   standard/cheap for batch application.
@@ -123,4 +126,4 @@ must switch contexts:
 - Saving order: first "can we not dispatch at all" (§1 DIY list), then "can cheap do
   it", only then standard/strong.
 - **Verification is never skipped for savings**: §6 is the quality floor. Acceptance
-  agents are cheap anyway — read-only and narrow.
+  agents stay affordable at any tier — read-only and narrow-scoped.

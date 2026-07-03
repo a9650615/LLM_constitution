@@ -1,6 +1,6 @@
 # 40 — Maintenance protocol: how to update this institution safely
 
-Version 2.0 (2026-07-03). Canonical (English); 中文鏡像 `zh/40-maintenance.md`.
+Version 2.1 (2026-07-04). Canonical (English); 中文鏡像 `zh/40-maintenance.md`.
 Audience: future models of any tier. The value of these files is *stable accumulation*;
 the biggest risk is well-meaning edits slowly ruining them (degradation modes:
 `docs/90-letter.md`).
@@ -23,6 +23,11 @@ cp "{file}" ~/claude-ops/backups/"{name}.$(date +%Y%m%d-%H%M%S).bak"
 
 (`backups/` >20 files → delete the oldest `.bak` files; the only deletion that needs
 no asking.)
+
+**Files OUTSIDE this repo that the institution deploys to** — `~/.claude/CLAUDE.md`,
+`~/.claude/agents/*`, `~/.aider.conf.yml`, `~/.config/opencode/AGENTS.md` — are
+beyond git's reach here: before editing any of them, copy the current version into
+`backups/` first (the cp command above).
 
 ## 2. Permission levels
 
@@ -76,6 +81,8 @@ not here.
 - Any docs/ file over **250 lines** → same: propose compaction to the user.
 - `CLAUDE.md` (master) stays within **one page (≤80 lines)** forever: new content
   goes into docs/, CLAUDE.md gets only a routing line.
+- `AGENTS.md` stays **≤80 lines** forever, for the same reason — its readers are the
+  smallest models on the machine.
 
 ## 5. After editing
 
@@ -84,7 +91,9 @@ not here.
 2. Tell the user what changed (one line is enough).
 3. If the change affects cross-references (renamed file, renumbered section), Grep
    `~/claude-ops/` and update every reference in the same session.
-4. Commit (§1).
+4. Commit (§1), then `git push` (remote: see README). Pushing this repo after a
+   verified commit is pre-authorized by the user (2026-07-04) — an exception to
+   the usual ask-before-push rule, for this repo only.
 
 ## 6. Language policy (canonical vs mirror)
 
@@ -100,7 +109,8 @@ not here.
 
 ## 7. Version stamps
 
-Every canonical file's header carries `Version: X.Y (date)`. Bump on every content
-edit (Y+1 for fixes/additions; X+1 for structural change, ask-user class). Mirrors
-carry "mirrors en vX.Y" in their header. A mirror whose number lags its canonical is
-stale by definition — trust the English file.
+Every canonical file's header carries `Version: X.Y (date)`. Bump the minor field on
+every content edit (2.0 → 2.1; 2.9 → 2.10, **not** 3.0 — the fields are integers, not
+decimals); bump the major field only for structural changes (the ask-user class).
+Mirrors carry "鏡像 en vX.Y" in their header. A mirror whose number lags its canonical
+is stale by definition — trust the English file.

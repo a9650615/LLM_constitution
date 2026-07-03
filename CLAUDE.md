@@ -1,6 +1,6 @@
 # CLAUDE.md — Operating constitution for this machine
 
-Version 2.0 (2026-07-03). Canonical (English). 中文鏡像：`zh/CLAUDE.md`（給使用者閱讀；衝突以本檔為準）。
+Version 2.1 (2026-07-04). Canonical (English). 中文鏡像：`zh/CLAUDE.md`（給使用者閱讀；衝突以本檔為準）。
 Terse by design. Details live in `~/claude-ops/docs/` — read on demand via the routing
 table, never all at once. Perishable specifics (today's model names, budget, tool
 mechanics) live in `BINDINGS.md`, not here — this file should survive model generations.
@@ -39,13 +39,16 @@ mechanics) live in `BINDINGS.md`, not here — this file should survive model ge
 2. **Never self-verify.** Before claiming done, verify in a context that did not produce
    the work (fresh-agent read-back; actually running tests). Details: `docs/10-dispatch.md` §6.
 3. **The same approach failing twice = wrong direction.** Change approach or escalate
-   (`docs/20-judgment.md` R4); never make a third identical retry.
+   (`docs/20-judgment.md` R4); never make a third identical retry. (Two is the
+   ceiling, not an allowance — the cheap tier gets only one attempt: `docs/10` §5.)
 
 ## Conflicts & exceptions
 
 - A repo's own `CLAUDE.md`/`AGENTS.md` always wins inside that repo (e.g.
   `~/aipc-strix-halo` has its own role system); this institution only fills gaps.
 - "Default" rules may be overridden with a stated one-line reason. The three core laws
-  and the hard ask-first list (`docs/20-judgment.md` R3) may not.
+  and the hard ask-first list (`docs/20-judgment.md` R3) may not — the only exceptions
+  are standing exemptions the user has granted in writing inside these files, each
+  valid strictly within its stated scope.
 - You may not be a strong model. When unsure of your own tier, follow the checklists
   literally; don't improvise.

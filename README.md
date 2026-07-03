@@ -15,7 +15,7 @@ canonical (cheaper tokens); `zh/` holds Chinese mirrors for the user.
 |---|---|
 | `CLAUDE.md` | master constitution: environment facts + routing table + three core laws (auto-loaded every Claude session) |
 | `BINDINGS.md` | perishable bindings: tier→model names, effort mechanics, budget, local model roster, agent wiring |
-| `AGENTS.md` | the seven-rule constitution for non-Claude agents (aider/OpenCode/goose/local GLM/Qwen/Gemma) |
+| `AGENTS.md` | the seven-rule constitution for non-Claude agents (aider/OpenCode/goose and local models — Qwen/Gemma/DeepSeek, see BINDINGS.md) |
 | `docs/10-dispatch.md` | dispatch rules: delegate-vs-DIY, tiers, escalation ladder, verify-never-self-verify, spend discipline |
 | `docs/20-judgment.md` | judgment rubrics R1–R6 with positive/counter examples |
 | `docs/30-templates.md` | delegation prompt templates ×5 (search/implement/refactor/research/review) |
@@ -25,9 +25,14 @@ canonical (cheaper tokens); `zh/` holds Chinese mirrors for the user.
 | `LESSONS.md` | machine-specific pitfall log (appendable; see docs/40 §3) |
 | `zh/` | Chinese mirrors of CLAUDE.md and docs/10–40 (for the user; headers name the mirrored version) |
 | `agents/` | custom subagent definitions (scout, verifier) — source of truth, deployed to `~/.claude/agents/` |
-| `backups/` | pre-edit copies when git is unavailable (docs/40 §1) |
+| `backups/` | pre-edit copies for out-of-repo files and git-less contexts (docs/40 §1) |
+| `.claude-plugin/plugin.json` | plugin manifest — this repo doubles as a Claude Code plugin (`llm-constitution`) |
+| `commands/` | slash commands: `/verify` (fresh-context acceptance), `/lesson` (record pitfall), `/rebind` (re-verify BINDINGS.md), `/handoff` (session handoff file) |
+| `skills/` | model-invoked skills: `dispatching` (delegation discipline), `judgment` (rubrics R1–R6) |
 
 This directory is a **git repo** — history is the primary audit trail.
+Remote: `https://github.com/a9650615/LLM_constitution.git` (push after every
+verified commit; the remote is the disaster-recovery copy).
 
 ## Deployment (what makes every session pick this up)
 
@@ -43,3 +48,14 @@ This directory is a **git repo** — history is the primary audit trail.
 
 If the box above is unchecked, the founding session was interrupted mid-deploy:
 confirm with the user, then run the steps.
+
+## Plugin shape (as of 2026-07-04)
+
+This repo doubles as a Claude Code plugin (`llm-constitution`): manifest in
+`.claude-plugin/`, plus `commands/`, `skills/`, `agents/`. **Installation /
+marketplace wiring is deliberately not set up yet** (user decision, 2026-07-04) —
+this machine consumes the institution via the global router + deployed agents
+(see Deployment above), not via plugin install. Commands and skills locate the
+docs by checking `~/claude-ops/` first and falling back to the plugin root, so
+they work in either mode. When installation is wanted later: add a marketplace
+entry pointing at this repo.

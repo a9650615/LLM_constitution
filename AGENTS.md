@@ -1,8 +1,9 @@
 # AGENTS.md — Rules for non-Claude agents on this machine
 
-(aider, OpenCode, Goose, local models: GLM / Qwen / Gemma / Codex / …)
+(aider, OpenCode, Goose and similar CLIs; local models served by the LiteLLM proxy —
+e.g. Qwen, Gemma, DeepSeek. Current roster: `~/claude-ops/BINDINGS.md`.)
 
-Version 2.0 (2026-07-03). A repo's own `AGENTS.md`/`CLAUDE.md` **overrides** this file
+Version 2.1 (2026-07-04). A repo's own `AGENTS.md`/`CLAUDE.md` **overrides** this file
 inside that repo. You may have a small context window and no subagent tools — this
 file is short on purpose and assumes only: read files, edit files, run commands.
 
@@ -26,9 +27,12 @@ file is short on purpose and assumes only: read files, edit files, run commands.
    not at all?). The phrase "should work" is banned — write "not verified" instead.
 3. **Two strikes, then stop.** If the same approach fails twice, stop. Report both
    attempts and the verbatim errors; ask for direction. Never a third identical try.
-4. **Ask before irreversible acts.** Deleting or overwriting files you didn't create;
-   `git push` / opening PRs; `rpm-ostree install` / reboot; editing `/etc`; sending
-   anything to an external service.
+4. **Ask before irreversible or expensive acts.** Deleting or overwriting files you
+   didn't create; `git push` / opening PRs; `rpm-ostree install` / reboot; editing
+   `/etc`; sending anything to an external service; spending big (≥3 parallel agents,
+   or any premium/large-model budget). And if the request contradicts what you
+   observe (a "useless" file that looks important), surface the contradiction and
+   ask — don't silently comply or silently refuse.
 5. **Never fabricate.** Can't find it → say "not found" + what you searched.
    No invented paths, APIs, version numbers, or benchmark figures.
 6. **Done means checked.** "Done" requires: every part of the request has an output,

@@ -1,6 +1,6 @@
 # 40 — 維護協議（中文鏡像）
 
-鏡像 en v2.0（2026-07-03）。權威版：`docs/40-maintenance.md`（英文），衝突以英文版為準。
+鏡像 en v2.1（2026-07-04）。權威版：`docs/40-maintenance.md`（英文），衝突以英文版為準。
 讀者：未來任何等級的模型。這套檔案的價值在「穩定累積」，最大風險是被好意的
 修改慢慢改爛（退化模式：`docs/90-letter.md`）。
 
@@ -15,6 +15,10 @@ cd ~/claude-ops && git add -A && git commit -m "pre-edit snapshot" -q
 改完並通過驗證（§5）後，再用描述真實變更的 message commit 一次。
 git 不可用時退回：`mkdir -p ~/claude-ops/backups && cp "{檔}" backups/"{名}.$(date +%Y%m%d-%H%M%S).bak"`
 （`backups/` 超過 20 檔刪最舊的 `.bak`——唯一免問的刪除。）
+
+**制度部署到 repo 外的檔案**——`~/.claude/CLAUDE.md`、`~/.claude/agents/*`、
+`~/.aider.conf.yml`、`~/.config/opencode/AGENTS.md`——git 管不到它們：
+改之前先把現行版本 cp 進 `backups/`。
 
 ## 2. 權限分級
 
@@ -57,13 +61,16 @@ git 不可用時退回：`mkdir -p ~/claude-ops/backups && cp "{檔}" backups/"{
   反覆出現的升格進對應 docs 檔後刪原條目）。精簡＝刪規則 → 先問使用者。
 - 任何 docs 檔超過 **250 行** → 同上提議。
 - `CLAUDE.md`（master）永遠 **≤80 行**：新內容進 docs/，master 只加路由行。
+- `AGENTS.md` 同樣永遠 **≤80 行**——它的讀者是機器上最小的模型。
 
 ## 5. 改完之後
 
 1. 派 `verifier` read-back：檔案完整、引用的路徑與名稱全部仍存在。
 2. 告知使用者改了什麼（一行即可）。
 3. 改動影響交叉引用（改檔名、改段落編號）→ Grep `~/claude-ops/` 同 session 全改。
-4. Commit（§1）。
+4. Commit（§1），然後 `git push`（遠端見 README）。本 repo 驗證過的 commit
+   推送已獲使用者預先授權（2026-07-04）——是「push 前要問」規則的唯一例外，
+   僅限本 repo。
 
 ## 6. 語言政策（權威版 vs 鏡像）
 
@@ -77,6 +84,7 @@ git 不可用時退回：`mkdir -p ~/claude-ops/backups && cp "{檔}" backups/"{
 
 ## 7. 版本戳記
 
-每個權威檔標頭帶 `Version: X.Y (date)`。內容一改就升版（修正／增補 +0.1；
-結構性變更＝要問使用者那類 +1.0）。鏡像標頭寫「鏡像 en vX.Y」。
+每個權威檔標頭帶 `Version: X.Y (date)`。內容一改就把次欄位 +1
+（2.0 → 2.1；2.9 → 2.10，**不是** 3.0——欄位是整數不是小數）；
+主欄位只在結構性變更（要問使用者那類）才動。鏡像標頭寫「鏡像 en vX.Y」。
 鏡像版本號落後權威版＝定義上過時——信英文檔。

@@ -1,6 +1,6 @@
 # 20 — Judgment rubrics (executable by weak models, line by line)
 
-Version 2.0 (2026-07-03). Canonical (English); 中文鏡像 `zh/20-judgment.md`.
+Version 2.1 (2026-07-04). Canonical (English); 中文鏡像 `zh/20-judgment.md`.
 Usage: when a situation matches a heading, read that section and check every line.
 Each rubric has a positive example (✅ do this) and a counter-example (❌ common
 failure). Unsure of your own tier → follow the checklists literally.
@@ -9,7 +9,9 @@ failure). Unsure of your own tier → follow the checklists literally.
 ## R1. When to escalate the model (pairs with `docs/10-dispatch.md` §5)
 
 **Escalate if ANY of:**
-- the same subtask already failed at the current tier (cheap: once; standard: twice).
+- the same subtask already failed at the current tier (cheap: once; standard: twice)
+  — and a round remains under the two-round cap (`docs/10-dispatch.md` §5); if both
+  rounds are spent, stop and report to the user instead.
 - the task needs causal reasoning across files/systems rather than pattern application
   (e.g. the root cause lives in another module's init order).
 - two plausible approaches must be chosen between, and choosing wrong costs more than
@@ -56,6 +58,11 @@ asked for isn't implemented because the package doesn't support it — details b
 - The user's request contradicts observed facts (they say "delete that useless file"
   but its content looks important) — surface the contradiction and ask; neither comply
   silently nor silently refuse.
+
+Standing exemptions: the user may pre-authorize a specific item **in writing inside
+these files** (e.g. the push pre-authorization in `docs/40-maintenance.md` §5, the
+`.bak` cleanup in its §1). An exemption counts only where its written scope explicitly
+covers the action — never generalize one.
 
 **Do NOT ask (decide yourself, report afterwards):**
 - Reversible implementation details clearly inside the original request's scope

@@ -1,6 +1,6 @@
 # BINDINGS.md — Perishable specifics (expected to rot; fix freely with evidence)
 
-Version 2.0, last verified 2026-07-03 on Claude Code 2.1.200.
+Version 2.1, last verified 2026-07-04 on Claude Code 2.1.200.
 The constitution (`CLAUDE.md`, `docs/`) is written against abstract tiers and should
 survive years. This file binds those tiers to today's concrete names — it will NOT
 survive years, by design. **When reality disagrees with this file, reality wins**:
@@ -58,10 +58,11 @@ Machine-global rules for non-Claude agents: `~/claude-ops/AGENTS.md`.
 
 ## Local model roster (LiteLLM proxy at 127.0.0.1:4000, per opencode config 2026-07-03)
 
-Local: `router-1b` (qwen2.5 1.5b), `resident-small` (gemma4 e4b), `main-70b`
-(qwen2.5 72b), `coder-fast` (qwen2.5-coder 7b), `coder-strong` (qwen2.5-coder 32b,
-aider default), `coder-thinking` (deepseek-r1 14b), `coder-agentic` (gemma4 26b,
-opencode default), `vlm-qwen2vl` (vision).
+Local: `router-1b` (qwen2.5 1.5b), `intent-3b`, `resident-small` (gemma4 e4b),
+`main-70b` (qwen2.5 72b), `coder-fast` (qwen2.5-coder 7b), `coder-strong`
+(qwen2.5-coder 32b, aider default), `coder-thinking` (deepseek-r1 14b),
+`coder-agentic` (gemma4 26b, opencode default), `vlm-qwen2vl` (vision),
+`embed-bge` (embeddings).
 Cloud routes via same proxy: `main-cloud`/`coder-cloud` (claude-sonnet-4-6),
 `thinking-cloud` (claude-opus-4-8), `gpt4o-cloud`, `gemini-cloud` (gemini-2.5-pro).
 Authoritative list: `curl -s http://127.0.0.1:4000/v1/models` or
