@@ -29,6 +29,7 @@ canonical (cheaper tokens); `zh/` holds Chinese mirrors for the user.
 | `agents/` | custom subagent definitions (scout, verifier) — source of truth, deployed to `~/.claude/agents/` |
 | `backups/` | pre-edit copies for out-of-repo files and git-less contexts (docs/40 §1) |
 | `.claude-plugin/plugin.json` | plugin manifest — this repo doubles as a Claude Code plugin (`llm-constitution`) |
+| `.claude-plugin/marketplace.json` | self-hosted marketplace listing (`source: "./"`) — lets `/plugin marketplace add` + `/plugin install` pull this same repo |
 | `commands/` | slash commands: `/verify` (fresh-context acceptance), `/lesson` (record pitfall), `/rebind` (re-verify BINDINGS.md), `/handoff` (session handoff file) |
 | `skills/` | model-invoked skills: `dispatching` (delegation discipline), `judgment` (rubrics R1–R6), `ten-laws` (constitutional questions, the supreme layer) |
 
@@ -55,10 +56,28 @@ confirm with the user, then run the steps.
 ## Plugin shape (as of 2026-07-04)
 
 This repo doubles as a Claude Code plugin (`llm-constitution`): manifest in
-`.claude-plugin/`, plus `commands/`, `skills/`, `agents/`. **Installation /
-marketplace wiring is deliberately not set up yet** (user decision, 2026-07-04) —
-this machine consumes the institution via the global router + deployed agents
-(see Deployment above), not via plugin install. Commands and skills locate the
-docs by checking `~/claude-ops/` first and falling back to the plugin root, so
-they work in either mode. When installation is wanted later: add a marketplace
-entry pointing at this repo.
+`.claude-plugin/`, plus `commands/`, `skills/`, `agents/`.
+
+**Progressive disclosure** (token economy by design): only skill descriptions sit
+in a session's context by default. Invoking a skill loads a ~40-line *card* — the
+operative core of its doc — not the doc itself; the card names the one section to
+read when a situation exceeds it. Dispatch templates embed the relevant rules
+inline in the subagent prompt, so subagents never load the constitution at all;
+non-Claude/small models get only the ≤80-line `AGENTS.md` floor. Precedence when
+summaries drift: full doc wins over card, Ten Base Laws win over everything.
+
+**Installation / marketplace wiring** (added 2026-07-06, superseding the
+2026-07-04 "not set up yet" decision): `.claude-plugin/marketplace.json` makes
+this repo self-hosting — `source: "./"` points at the repo root, so the same
+checkout serves as both the plugin and its own marketplace listing. Install
+with:
+
+```
+/plugin marketplace add a9650615/LLM_constitution
+/plugin install llm-constitution
+```
+
+This machine still primarily consumes the institution via the global router +
+deployed agents (see Deployment above), not via plugin install — the two paths
+coexist. Commands and skills locate the docs by checking `~/claude-ops/` first
+and falling back to the plugin root, so they work in either mode.

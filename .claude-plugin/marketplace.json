@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "llm-constitution-marketplace",
+  "description": "Self-hosted marketplace for the llm-constitution plugin.",
+  "owner": {
+    "name": "birdyo"
+  },
+  "plugins": [
+    {
+      "name": "llm-constitution",
+      "description": "An operating constitution for AI coding agents. Supreme layer: the Ten Base Laws — invariant-grounded, precedence-ordered, model-agnostic. Below it: dispatch discipline, never-self-verify acceptance, escalation ladders, judgment rubrics, and a perishable bindings layer.",
+      "source": "./",
+      "category": "governance"
+    }
+  ]
+}
