@@ -16,7 +16,7 @@ canonical (cheaper tokens); `zh/` holds Chinese mirrors for the user.
 | `CLAUDE.md` | master constitution: environment facts + routing table + three core laws, subordinate to the Ten Base Laws (auto-loaded every Claude session) |
 | `docs/05-ten-laws.md` | the Ten Base Laws — the supreme layer above the three core laws; every other file is subordinate to it |
 | `BINDINGS.md` | perishable bindings: tier→model names, effort mechanics, budget, local model roster, agent wiring |
-| `AGENTS.md` | the seven-rule constitution for non-Claude agents (aider/OpenCode/goose and local models — Qwen/Gemma/DeepSeek, see BINDINGS.md) |
+| `AGENTS.md` | the eight-rule constitution for non-Claude agents (aider/OpenCode/goose and local models — Qwen/Gemma/DeepSeek, see BINDINGS.md) |
 | `docs/10-dispatch.md` | dispatch rules: delegate-vs-DIY, tiers, escalation ladder, verify-never-self-verify, spend discipline |
 | `docs/15-token-economy.md` | context hygiene for the main conversation: reading/output/tool-call discipline, long-context checkpointing, what never to economize |
 | `docs/20-judgment.md` | judgment rubrics R1–R6 with positive/counter examples |

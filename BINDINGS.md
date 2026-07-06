@@ -100,7 +100,7 @@ Cloud routes via same proxy: `main-cloud`/`coder-cloud` (claude-sonnet-4-6),
 `thinking-cloud` (claude-opus-4-8), `gpt4o-cloud`, `gemini-cloud` (gemini-2.5-pro).
 Authoritative list: `curl -s http://127.0.0.1:4000/v1/models` or
 `~/.config/opencode/config.json`. Local ≤32B models are execution-grade only —
-hold them to `AGENTS.md`'s seven rules, don't hand them judgment calls.
+hold them to `AGENTS.md`'s eight rules, don't hand them judgment calls.
 
 ## Quick re-verification commands
 
