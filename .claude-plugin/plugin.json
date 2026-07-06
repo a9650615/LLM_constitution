@@ -1,12 +1,12 @@
 {
   "name": "llm-constitution",
-  "version": "2.1.0",
-  "description": "An operating constitution for AI coding agents: dispatch discipline (commander stays off grunt work), never-self-verify acceptance, escalation ladders, judgment rubrics with examples, and a perishable bindings layer that absorbs model-name rot.",
+  "version": "2.3.0",
+  "description": "An operating constitution for AI coding agents. Supreme layer: the Ten Base Laws — invariant-grounded, precedence-ordered, model-agnostic. Below it: dispatch discipline (commander stays off grunt work), never-self-verify acceptance, escalation ladders, judgment rubrics with examples, and a perishable bindings layer that absorbs model-name rot.",
   "author": {
     "name": "birdyo"
   },
   "homepage": "https://github.com/a9650615/LLM_constitution",
   "repository": "https://github.com/a9650615/LLM_constitution.git",
   "license": "MIT",
-  "keywords": ["constitution", "dispatch", "subagents", "verification", "governance"]
+  "keywords": ["constitution", "ten-laws", "dispatch", "subagents", "verification", "governance"]
 }
