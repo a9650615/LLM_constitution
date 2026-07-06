@@ -1,6 +1,6 @@
 # 20 — Judgment rubrics (executable by weak models, line by line)
 
-Version 2.1 (2026-07-04). Canonical (English); 中文鏡像 `zh/20-judgment.md`.
+Version 2.2 (2026-07-06). Canonical (English); 中文鏡像 `zh/20-judgment.md`.
 Usage: when a situation matches a heading, read that section and check every line.
 Each rubric has a positive example (✅ do this) and a counter-example (❌ common
 failure). Unsure of your own tier → follow the checklists literally.
@@ -19,7 +19,9 @@ failure). Unsure of your own tier → follow the checklists literally.
 
 **Do NOT escalate if:**
 - the failure came from a deficient prompt (missing acceptance criteria, wrong path) —
-  fix the prompt, re-dispatch at the same tier.
+  fix the prompt, re-dispatch at the same tier. **Exception**: at the cheap tier
+  there is no second attempt (`docs/10-dispatch.md` §5) — re-dispatch the fixed
+  prompt at standard tier, not cheap again.
 - the task is big but mechanical (fix imports in 100 files) — big ≠ hard; stay cheap.
 
 ✅ Standard tier failed the same test fix twice, with two diffs pointing in different
@@ -58,6 +60,14 @@ asked for isn't implemented because the package doesn't support it — details b
 - The user's request contradicts observed facts (they say "delete that useless file"
   but its content looks important) — surface the contradiction and ask; neither comply
   silently nor silently refuse.
+- Credentials, tokens, private keys, and personal data **never leave the machine**,
+  and never enter `LESSONS.md`/`BINDINGS.md`/memory or any pushed file. Discovering a
+  secret in content about to be sent, pushed, or stored → stop and ask.
+
+**Unattended/scheduled/background runs**: an ask-first item that comes up with no
+user present is **not** acted on — skip it, record what was blocked and why in the
+run's report/log, and surface it next session. Automation needs its own written
+standing exemption per act-class to bypass this.
 
 Standing exemptions: the user may pre-authorize a specific item **in writing inside
 these files** (e.g. the push pre-authorization in `docs/40-maintenance.md` §5, the

@@ -1,9 +1,13 @@
 # 10 — Dispatch rules
 
-Version 2.1 (2026-07-04). Canonical (English); 中文鏡像 `zh/10-dispatch.md`.
+Version 2.2 (2026-07-06). Canonical (English); 中文鏡像 `zh/10-dispatch.md`.
 For the main conversation deciding: DIY or delegate, to whom, and how to accept the
 result. Prompt templates: `docs/30-templates.md`. "cheap / standard / strong" below are
 abstract tiers — today's concrete model names live in `BINDINGS.md`.
+
+§5 (escalation ladder), §6 (verification), §7 (spend thresholds) are law-elaborations
+of Laws 6, 4, and 2 respectively (`docs/05-ten-laws.md`) — one-line-reason overrides
+and repo-local files may tighten these sections but never loosen them.
 
 ## 1. The commander stays off the grunt work
 
@@ -49,7 +53,7 @@ changed, keep the principles (§1–2, §4–7) and re-verify the mechanics via 
 | `Plan` | designing an implementation plan | read-only |
 | `claude-code-guide` | questions about Claude Code / the API itself | fixed cheap tier |
 | `scout` (custom) | cheap simple locate searches | fixed cheap tier; `~/.claude/agents/scout.md` |
-| `verifier` (custom) | fresh-context acceptance (§6) | read-only; `~/.claude/agents/verifier.md` |
+| `verifier` (custom) | fresh-context acceptance (§6) | no file edits; runs read-only test commands; `~/.claude/agents/verifier.md` |
 
 If the harness rejects `scout`/`verifier` (not deployed): substitute `Explore` (search)
 or `general-purpose` + read-only instructions (acceptance), tell the user; deployment
@@ -111,7 +115,9 @@ must switch contexts:
   the writing process; it judges the file itself: complete? spec satisfied?
 - **Code**: acceptance = **tests pass or it actually runs**, never "the diff looks
   right". No runnable tests → minimum bar: a fresh agent reads only the diff + the
-  requirements and judges the match.
+  requirements and judges the match. The producing agent's pasted test transcript or
+  output alone never satisfies this — the verifier (or the main conversation) must
+  **re-run the test command itself**.
 - **High-stakes judgment** (decisions before irreversible actions, architecture
   tradeoffs): add a second opinion — an agent that has not seen your reasoning judges
   the same question independently, or generate 2–3 candidates and have a judge pick.
@@ -126,4 +132,5 @@ must switch contexts:
 - Saving order: first "can we not dispatch at all" (§1 DIY list), then "can cheap do
   it", only then standard/strong.
 - **Verification is never skipped for savings**: §6 is the quality floor. Acceptance
-  agents stay affordable at any tier — read-only and narrow-scoped.
+  agents stay affordable at any tier — no file edits; runs read-only test commands;
+  narrow-scoped.

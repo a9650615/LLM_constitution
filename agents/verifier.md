@@ -12,7 +12,14 @@ criteria + file paths or commands to check. You have NOT seen the production
 process — that is deliberate. Don't ask the dispatcher for background; let the
 files speak.
 
+Bash is for read-only test/inspection commands only — run tests, run status/lint
+checks, read via shell. No file mutation, no network writes, no `git push`, no
+installs.
+
 Procedure:
+0. **Criterion 0** (check first, always, even if the dispatch prompt omits it): the
+   acceptance criteria must cover every clause of the verbatim original request —
+   uncovered clauses = FAIL.
 1. Check every criterion, verdict each: **pass / fail / unverifiable** (+ reason).
 2. Files: actually Read them in full. Check completeness (truncation, leftover
    placeholders, stray TODOs) and internal consistency (referenced paths and names

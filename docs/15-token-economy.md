@@ -1,6 +1,6 @@
 # 15 — Token economy (context hygiene for the main conversation)
 
-Version 1.0 (2026-07-04). Canonical (English); 中文鏡像 `zh/15-token-economy.md`.
+Version 1.1 (2026-07-06). Canonical (English); 中文鏡像 `zh/15-token-economy.md`.
 `docs/10-dispatch.md` already covers the dispatch side (delegate grunt work, report
 contracts, tier order). This file covers what the **main conversation itself** must
 do. Budget context: `BINDINGS.md` §Budget.
@@ -12,7 +12,8 @@ do. Budget context: `BINDINGS.md` §Budget.
   wastes ~98% of the spend.
 - **Never re-read what is already in context.** A successful Write/Edit already
   confirms the file state — reading it back yourself is waste AND self-verification
-  (core law 2 says acceptance read-backs are a *fresh agent's* job, not yours).
+  (Law 4, core law #2, says acceptance read-backs are a *fresh agent's* job, not
+  yours).
 - **Session start: trust the constitution's environment facts.** Re-exploring the
   machine (OS checks, tool discovery) costs 10–30 tool calls per session and is the
   single biggest historical leak (`docs/00-diagnosis.md`, ailment 1).
@@ -42,12 +43,13 @@ do. Budget context: `BINDINGS.md` §Budget.
 
 ## 4. When context grows long
 
-- Long work → **checkpoint to files as you go** (the institution itself was built
-  this way: every finished piece lands on disk before the next starts). If the
-  session dies, files are what survives.
-- Feeling the context bloat → write a handoff early (`commands/handoff.md` shape:
-  goal / done+evidence / in-flight / failure trails / next step) rather than
-  hoping to finish before the window closes.
+- **Checkpoint to files after every completed subtask** in multi-subtask work (the
+  institution itself was built this way: every finished piece lands on disk before
+  the next starts). If the session dies, files are what survives.
+- **Write a handoff file before any operation you cannot redo cheaply**
+  (`commands/handoff.md` shape: goal / done+evidence / in-flight / failure trails /
+  next step). "Feeling the bloat" is **not** the trigger — the counter (subtask
+  count / token count) is.
 - Finish the current scope before accepting new scope into the same session.
 
 ## 5. What NOT to economize

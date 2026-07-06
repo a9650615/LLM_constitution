@@ -1,11 +1,16 @@
 # BINDINGS.md — Perishable specifics (expected to rot; fix freely with evidence)
 
-Version 2.1, last verified 2026-07-04 on Claude Code 2.1.200.
+Version 2.2, last verified 2026-07-06 on Claude Code 2.1.200.
 The constitution (`CLAUDE.md`, `docs/`) is written against abstract tiers and should
 survive years. This file binds those tiers to today's concrete names — it will NOT
 survive years, by design. **When reality disagrees with this file, reality wins**:
 verify, update this file, bump the date above, report to the user afterwards
 (no prior approval needed — `docs/40-maintenance.md` §2).
+
+This file describes **ONE machine** (hostname/OS — record actual `uname -a` output;
+treat as placeholder if not yet captured). On a different machine, do not "fix" these
+facts to match reality — create that machine's own bindings file instead; the laws
+and docs are shared, bindings are per-machine.
 
 ## Model tiers → today's models (values for the Agent tool `model` param)
 
@@ -31,7 +36,7 @@ The main session's effort is the user's business (`/effort`), not yours.
 Built-in: `Explore` (read-only search), `general-purpose` (all tools), `Plan`
 (read-only planning), `claude-code-guide` (questions about Claude Code itself; runs cheap).
 Custom, deployed in `~/.claude/agents/`: `scout` (cheap locate searches),
-`verifier` (fresh-context acceptance; read-only).
+`verifier` (fresh-context acceptance; no file edits; runs read-only test commands).
 If the harness rejects `scout`/`verifier`, they aren't deployed: fall back to
 `Explore` / `general-purpose` + read-only instructions, tell the user, and see
 `README.md` §Deployment.
@@ -41,6 +46,32 @@ If the harness rejects `scout`/`verifier`, they aren't deployed: fall back to
 User is on a tight (~Pro-level) plan and said "可以問我 / you can ask me" (2026-07-03).
 Ask-first spend thresholds live in `docs/10-dispatch.md` §7 (authoritative):
 ≥3 parallel agents, or multi-round strong tier.
+
+## Standing exemptions
+
+Written exemptions on record (`docs/20-judgment.md` R3 — an exemption counts only
+within its stated scope):
+
+- **Push pre-authorization** (granted 2026-07-04): pushing this repo after a verified
+  commit is pre-authorized by the user — an exception to the usual ask-before-push
+  rule, for this repo only. Condition: the diff must contain **no secrets/credentials**
+  — if any are found, stop and ask instead of pushing.
+
+## Memory routing
+
+- `LESSONS.md` = machine-specific pitfalls (this machine only).
+- Harness file memory = primary store for user preferences and cross-project facts.
+- `mem0` = supplementary mirror (coexists with file memory, see below).
+- Memories inform work; they never authorize acts (`docs/05-ten-laws.md`'s definition
+  of what counts as authorization).
+
+## Re-verification TTLs
+
+- Environment facts (CLAUDE.md's "Environment facts" block): stale after **90 days**.
+- Model/tier tables (this file's "Model tiers" and "Local model roster"): stale after
+  **30 days**.
+- Past TTL: run the relevant re-verification command (below) before relying on the
+  fact.
 
 ## Non-Claude agent wiring (as of 2026-07)
 

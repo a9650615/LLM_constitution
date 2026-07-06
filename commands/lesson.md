@@ -22,7 +22,10 @@ Steps:
    this machine/environment and likely to recur.
 
 3. Dedup: Grep the file for related keywords. If an existing entry covers it,
-   update that entry instead of appending a near-duplicate.
+   extend that entry instead of appending a near-duplicate — extensions only
+   (strict superset: nothing existing removed or reworded). A rewrite that shortens
+   or alters an existing lesson is a loosening: ask the user first
+   (`docs/40-maintenance.md` §2).
 
 4. Append in the established format (`## L{n}. {one-sentence takeaway} ({date})`),
    English preferred. If the file now exceeds 40 entries or 250 lines, tell the

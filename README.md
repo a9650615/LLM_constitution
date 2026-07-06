@@ -13,7 +13,8 @@ canonical (cheaper tokens); `zh/` holds Chinese mirrors for the user.
 
 | File | Content |
 |---|---|
-| `CLAUDE.md` | master constitution: environment facts + routing table + three core laws (auto-loaded every Claude session) |
+| `CLAUDE.md` | master constitution: environment facts + routing table + three core laws, subordinate to the Ten Base Laws (auto-loaded every Claude session) |
+| `docs/05-ten-laws.md` | the Ten Base Laws — the supreme layer above the three core laws; every other file is subordinate to it |
 | `BINDINGS.md` | perishable bindings: tier→model names, effort mechanics, budget, local model roster, agent wiring |
 | `AGENTS.md` | the seven-rule constitution for non-Claude agents (aider/OpenCode/goose and local models — Qwen/Gemma/DeepSeek, see BINDINGS.md) |
 | `docs/10-dispatch.md` | dispatch rules: delegate-vs-DIY, tiers, escalation ladder, verify-never-self-verify, spend discipline |
@@ -24,12 +25,12 @@ canonical (cheaper tokens); `zh/` holds Chinese mirrors for the user.
 | `docs/00-diagnosis.md` | 中文, archival — the three harness ailments this institution treats |
 | `docs/90-letter.md` | 中文, archival — letter from the founding session: context + degradation modes |
 | `LESSONS.md` | machine-specific pitfall log (appendable; see docs/40 §3) |
-| `zh/` | Chinese mirrors of CLAUDE.md and docs/10–40 (for the user; headers name the mirrored version) |
+| `zh/` | Chinese mirrors of CLAUDE.md and docs/05, docs/10–40 (for the user; headers name the mirrored version) |
 | `agents/` | custom subagent definitions (scout, verifier) — source of truth, deployed to `~/.claude/agents/` |
 | `backups/` | pre-edit copies for out-of-repo files and git-less contexts (docs/40 §1) |
 | `.claude-plugin/plugin.json` | plugin manifest — this repo doubles as a Claude Code plugin (`llm-constitution`) |
 | `commands/` | slash commands: `/verify` (fresh-context acceptance), `/lesson` (record pitfall), `/rebind` (re-verify BINDINGS.md), `/handoff` (session handoff file) |
-| `skills/` | model-invoked skills: `dispatching` (delegation discipline), `judgment` (rubrics R1–R6) |
+| `skills/` | model-invoked skills: `dispatching` (delegation discipline), `judgment` (rubrics R1–R6), `ten-laws` (constitutional questions, the supreme layer) |
 
 This directory is a **git repo** — history is the primary audit trail.
 Remote: `https://github.com/a9650615/LLM_constitution.git` (push after every
@@ -42,7 +43,8 @@ verified commit; the remote is the disaster-recovery copy).
 3. Non-Claude: `~/.aider.conf.yml` has `read: ["/var/home/birdyo/claude-ops/AGENTS.md"]`;
    `~/.config/opencode/AGENTS.md` is a symlink to `AGENTS.md` here. goose: not wired.
 4. Smoke test: open a fresh session anywhere, ask "what are your environment rules" —
-   it should recite the three core laws.
+   it should recite the three core laws (and, if pressed, name the Ten Base Laws as
+   the supreme layer they sit under).
 
 - [x] Deployed 2026-07-03 (founding session; re-deployed after the v2.0
   English-canonical restructure)
