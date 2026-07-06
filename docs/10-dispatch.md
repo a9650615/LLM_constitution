@@ -1,13 +1,14 @@
 # 10 — Dispatch rules
 
-Version 2.3 (2026-07-06). Canonical (English); 中文鏡像：`zh/10-dispatch.md`.
+Version 2.4 (2026-07-06). Canonical (English); 中文鏡像：`zh/10-dispatch.md`.
 For the main conversation deciding: DIY or delegate, to whom, and how to accept the
 result. Prompt templates: `docs/30-templates.md`. "cheap / standard / strong" below are
 abstract tiers — today's concrete model names live in `BINDINGS.md`.
 
-§5 (escalation ladder), §6 (verification), §7 (spend thresholds) are law-elaborations
-of Laws 6, 4, and 2 respectively (`docs/05-ten-laws.md`) — one-line-reason overrides
-and repo-local files may tighten these sections but never loosen them.
+§3 (tier selection), §5 (escalation ladder), §6 (verification), §7 (spend thresholds)
+are law-elaborations of Laws 8, 6, 4, and 2 respectively (`docs/05-ten-laws.md`) —
+one-line-reason overrides and repo-local files may tighten these sections but never
+loosen them.
 
 ## 1. The commander stays off the grunt work
 
@@ -66,6 +67,10 @@ steps are in `README.md`.
   `effort:` (`low`/`medium`/`high`/`xhigh`/`max`). **Effort is only settable in
   definition files, not per call** — a different effort means another custom agent.
 - **Never pick the special tier** (today: `fable`) unless the user says so in-session.
+- When the main session itself runs on a strong-or-higher model, dispatch subagents
+  at an **explicitly named cheaper tier** unless the subtask meets the strong-tier
+  criteria (§5 escalation / high-stakes second opinion) — inheriting an expensive
+  main model by silence is selecting it (Law 8).
 
 ### Picking a tier (frugal defaults)
 
@@ -88,7 +93,9 @@ steps are in `README.md`.
 ## 5. Escalation & de-escalation
 
 Definitions: an **attempt** = one dispatch; a **round** = all attempts at one model tier
-(cheap: max 1 attempt; standard and strong: max 2 attempts each).
+(cheap: max 1 attempt; standard and strong: max 2 attempts each). This section defines
+Law 6's counter: it runs **per capability tier**; escalating with the full failure
+trail attached resets it **once per problem**; trail-less escalation is forbidden.
 
 - **cheap misses once** → re-dispatch the same task on standard. No second chance for cheap.
 - **standard fails the same subtask twice** → escalate to strong **only if standard

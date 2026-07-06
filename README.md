@@ -84,3 +84,18 @@ This machine still primarily consumes the institution via the global router +
 deployed agents (see Deployment above), not via plugin install — the two paths
 coexist. Commands and skills locate the docs by checking `~/claude-ops/` first
 and falling back to the plugin root, so they work in either mode.
+
+**Updating an installed plugin** (facts verified 2026-07-06 against
+code.claude.com/docs/en/discover-plugins and /en/plugins):
+
+- Release side (this repo): update delivery is driven by `plugin.json`'s
+  `version` field — installed users only receive an update when it is bumped
+  (bump rules: `docs/40-maintenance.md` §7). Push alone is not a release.
+- Consumer side, manual: `/plugin marketplace update llm-constitution-marketplace`
+  refreshes the catalog and picks up the new version, then `/reload-plugins`
+  when prompted.
+- Consumer side, automatic: third-party marketplaces have auto-update OFF by
+  default. Enable per-marketplace: `/plugin` → Marketplaces → select it →
+  Enable auto-update; Claude Code then refreshes and updates at startup.
+- Git checkout consumers (this machine's global-router mode): plain `git pull`
+  — no plugin machinery involved.
