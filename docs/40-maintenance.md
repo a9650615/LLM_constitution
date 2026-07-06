@@ -1,6 +1,6 @@
 # 40 — Maintenance protocol: how to update this institution safely
 
-Version 2.1 (2026-07-04). Canonical (English); 中文鏡像 `zh/40-maintenance.md`.
+Version 2.2 (2026-07-06). Canonical (English); 中文鏡像 `zh/40-maintenance.md`.
 Audience: future models of any tier. The value of these files is *stable accumulation*;
 the biggest risk is well-meaning edits slowly ruining them (degradation modes:
 `docs/90-letter.md`).
@@ -46,6 +46,9 @@ beyond git's reach here: before editing any of them, copy the current version in
 
 ### Ask the user first (present: current text → proposed text + reason)
 
+- **Any edit to `docs/05-ten-laws.md`, in any direction** — including edits framed as
+  tightening or compaction. Its Law 10 additionally requires a fresh-context semantic
+  read-back (not just path-existence) before commit.
 - Changing or deleting the **three core laws** (CLAUDE.md) or the **hard ask-first
   list** (`docs/20-judgment.md` R3).
 - Changing **threshold numbers** in `docs/10-dispatch.md` (files-before-delegating,
@@ -97,8 +100,9 @@ not here.
 
 ## 6. Language policy (canonical vs mirror)
 
-- **Canonical = the English files**: `CLAUDE.md`, `docs/10–40`, `BINDINGS.md`,
-  `AGENTS.md`. Every content edit lands here first. On any conflict, English wins.
+- **Canonical = the English files**: `CLAUDE.md`, `docs/05`, `docs/10–40`,
+  `BINDINGS.md`, `AGENTS.md`. Every content edit lands here first. On any conflict,
+  English wins.
 - **`zh/` mirrors** exist for the user's reading. After editing a canonical file,
   update its mirror in the same session if quick; otherwise just bump the canonical
   version stamp — the mirror header names the version it mirrors, so lag stays
