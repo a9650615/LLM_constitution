@@ -1,6 +1,6 @@
 # 40 — Maintenance protocol: how to update this institution safely
 
-Version 2.4 (2026-07-06). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
+Version 2.5 (2026-07-06). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
 Audience: future models of any tier. The value of these files is *stable accumulation*;
 the biggest risk is well-meaning edits slowly ruining them (degradation modes:
 `docs/90-letter.md`).
@@ -133,5 +133,6 @@ every content edit (2.0 → 2.1; 2.9 → 2.10, **not** 3.0 — the fields are in
 decimals); bump the major field only for structural changes (the ask-user class).
 Mirrors carry "鏡像 en vX.Y" in their header. A mirror whose number lags its canonical
 is stale by definition — trust the English file. `plugin.json`'s version tracks
-CLAUDE.md's major.minor as X.Y.0; bump its patch digit only for
-plugin-packaging-only changes.
+CLAUDE.md's major.minor as X.Y.Z; bump its patch digit (Z) for any plugin-shipped
+change that does not touch CLAUDE.md (packaging, or content in other shipped
+files); reset Z to 0 whenever CLAUDE.md's X.Y moves.
