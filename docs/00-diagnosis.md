@@ -62,3 +62,6 @@ repo 級掃描、網頁研究、批次改檔——這些就是工人活。
 2026-07-06 補記：以上所述之 repo-local 檔案優先權，現從屬於十條基本法
 （`docs/05-ten-laws.md`）；repo 檔案僅能覆寫「作業性規章」（operational
 statutes），不能覆寫基本法本身。
+
+2026-07-06 補記二：上文「修法 3」所指的「維護協議 §memory」一節已不存在；
+現行權威位置為 `BINDINGS.md` §Memory routing。

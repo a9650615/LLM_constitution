@@ -41,19 +41,22 @@ verified commit; the remote is the disaster-recovery copy).
 
 1. Global router `~/.claude/CLAUDE.md` → points here (sessions in any directory).
 2. `agents/*.md` copied to `~/.claude/agents/` (scout/verifier available everywhere).
-3. Non-Claude: `~/.aider.conf.yml` has `read: ["/var/home/birdyo/claude-ops/AGENTS.md"]`;
+3. Non-Claude: `~/.aider.conf.yml` has a `read:` pointer to this repo's `AGENTS.md`
+   (literal path recorded in `BINDINGS.md` §Non-Claude agent wiring);
    `~/.config/opencode/AGENTS.md` is a symlink to `AGENTS.md` here. goose: not wired.
 4. Smoke test: open a fresh session anywhere, ask "what are your environment rules" —
    it should recite the three core laws (and, if pressed, name the Ten Base Laws as
    the supreme layer they sit under).
 
 - [x] Deployed 2026-07-03 (founding session; re-deployed after the v2.0
-  English-canonical restructure)
+  English-canonical restructure). Later additions (v2.1 plugin shape, v2.3 ten
+  laws, v2.4 skill cards) change repo files only — the global router reads them
+  in place; re-copy `agents/*.md` only if those files change.
 
 If the box above is unchecked, the founding session was interrupted mid-deploy:
 confirm with the user, then run the steps.
 
-## Plugin shape (as of 2026-07-04)
+## Plugin shape (as of 2026-07-06)
 
 This repo doubles as a Claude Code plugin (`llm-constitution`): manifest in
 `.claude-plugin/`, plus `commands/`, `skills/`, `agents/`.

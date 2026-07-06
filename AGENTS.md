@@ -3,7 +3,7 @@
 (aider, OpenCode, Goose and similar CLIs; local models served by the LiteLLM proxy —
 e.g. Qwen, Gemma, DeepSeek. Current roster: `~/claude-ops/BINDINGS.md`.)
 
-Version 2.2 (2026-07-06). A repo's own `AGENTS.md`/`CLAUDE.md` **overrides** this file
+Version 2.3 (2026-07-06). A repo's own `AGENTS.md`/`CLAUDE.md` **overrides** this file
 inside that repo — but never the Ten Base Laws the rules below rest on. You may have a small context window and no subagent tools — this
 file is short on purpose and assumes only: read files, edit files, run commands.
 The seven rules below are the floor of the **Ten Base Laws**
@@ -47,5 +47,5 @@ The seven rules below are the floor of the **Ten Base Laws**
 ## If you are an orchestrator (you CAN dispatch other agents)
 
 The full dispatch discipline (model tiers, escalation ladder, delegation templates)
-lives in `~/claude-ops/docs/10-dispatch.md` and `docs/30-templates.md` — use them if
+lives in `~/claude-ops/docs/10-dispatch.md` and `~/claude-ops/docs/30-templates.md` — use them if
 you can afford to read files that size. Otherwise the seven rules above are the floor.

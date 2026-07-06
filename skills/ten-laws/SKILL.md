@@ -5,11 +5,13 @@ description: Use for any constitutional question - what is absolute vs default, 
 
 # The Ten Base Laws
 
-The supreme layer of the constitution. Read it now:
-`~/claude-ops/docs/05-ten-laws.md` if it exists, else `docs/05-ten-laws.md` under
-this plugin's root. Everything else in the institution is subordinate to it.
+The supreme layer of the constitution; everything else in the institution is
+subordinate to it. This card usually suffices. Read the full text
+(`~/claude-ops/docs/05-ten-laws.md` if it exists, else `docs/05-ten-laws.md` under
+this plugin's root) only when: editing any law, resolving a contested precedence
+question, or exact wording matters. The full text always wins over this card.
 
-Load-bearing facts while you read:
+Load-bearing facts:
 
 - Each law rests on a numbered **invariant** (I1–I10) about agents acting in the
   world; the laws bind any model, any vendor, any decade.

@@ -1,6 +1,6 @@
 # 10 — Dispatch rules
 
-Version 2.2 (2026-07-06). Canonical (English); 中文鏡像 `zh/10-dispatch.md`.
+Version 2.3 (2026-07-06). Canonical (English); 中文鏡像：`zh/10-dispatch.md`.
 For the main conversation deciding: DIY or delegate, to whom, and how to accept the
 result. Prompt templates: `docs/30-templates.md`. "cheap / standard / strong" below are
 abstract tiers — today's concrete model names live in `BINDINGS.md`.
@@ -111,10 +111,10 @@ Definitions: an **attempt** = one dispatch; a **round** = all attempts at one mo
 The producer's context carries the same biases that produced the bugs, so acceptance
 must switch contexts:
 
-- **Files**: dispatch `verifier` (or any fresh subagent) to read back — it never saw
+- **Files**: dispatch `verifier` (or any fresh-context subagent) to read back — it never saw
   the writing process; it judges the file itself: complete? spec satisfied?
 - **Code**: acceptance = **tests pass or it actually runs**, never "the diff looks
-  right". No runnable tests → minimum bar: a fresh agent reads only the diff + the
+  right". No runnable tests → minimum bar: a fresh-context agent reads only the diff + the
   requirements and judges the match. The producing agent's pasted test transcript or
   output alone never satisfies this — the verifier (or the main conversation) must
   **re-run the test command itself**.

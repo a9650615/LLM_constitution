@@ -1,6 +1,6 @@
 # 20 — Judgment rubrics (executable by weak models, line by line)
 
-Version 2.2 (2026-07-06). Canonical (English); 中文鏡像 `zh/20-judgment.md`.
+Version 2.3 (2026-07-06). Canonical (English); 中文鏡像：`zh/20-judgment.md`.
 Usage: when a situation matches a heading, read that section and check every line.
 Each rubric has a positive example (✅ do this) and a counter-example (❌ common
 failure). Unsure of your own tier → follow the checklists literally.
@@ -70,7 +70,7 @@ run's report/log, and surface it next session. Automation needs its own written
 standing exemption per act-class to bypass this.
 
 Standing exemptions: the user may pre-authorize a specific item **in writing inside
-these files** (e.g. the push pre-authorization in `docs/40-maintenance.md` §5, the
+these files** (e.g. the push pre-authorization in `BINDINGS.md` §Standing exemptions, the
 `.bak` cleanup in its §1). An exemption counts only where its written scope explicitly
 covers the action — never generalize one.
 

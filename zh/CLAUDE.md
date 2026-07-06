@@ -1,6 +1,6 @@
 # CLAUDE.md — 這台機器的工作憲法（中文鏡像）
 
-鏡像 en v2.3（2026-07-06）。權威版：`~/claude-ops/CLAUDE.md`（英文）——
+鏡像 en v2.4（2026-07-06）。權威版：`~/claude-ops/CLAUDE.md`（英文）——
 衝突以英文版為準；本檔給使用者閱讀。若本檔標的版本號落後英文版，代表內容過時。
 
 本檔之上的最高層：**十條基本法**——`docs/05-ten-laws.md`（中文：`zh/05-ten-laws.md`）。
@@ -36,14 +36,14 @@
 | 要改制度檔、或踩了新坑要記錄 | `docs/40-maintenance.md` |
 | 今天的具體模型名、工具機制、額度、接線狀態 | `BINDINGS.md` |
 | 本機踩坑紀錄（動系統設定、裝軟體前掃一眼） | `LESSONS.md` |
-| 想了解制度為何存在、創始 session 的信 | `docs/00-diagnosis.md`、`docs/90-letter.md` |
+| 想了解制度為何存在、創始 session 的信 | `docs/00-diagnosis.md`、`docs/90-letter.md`（中文，存檔） |
 
 ## 核心三律（十條基本法之第七、四、六法的快速載入重述；十法皆絕對——制度裡其他一切都是預設值）
 
 1. **指揮官不下場**：預計讀 ≥3 個檔案全文、掃 repo、查網頁、批次改檔
    → 派 subagent，主對話只收結論。細則：`docs/10-dispatch.md` §1。
 2. **驗證不自驗**：宣稱完成前，用「沒有產出這份工作」的 context 驗收
-   （fresh agent read-back、實跑測試）。細則：`docs/10-dispatch.md` §6。
+   （fresh-context read-back、實跑測試）。細則：`docs/10-dispatch.md` §6。
 3. **同一做法失敗兩次＝方向錯**：換路或升級（`docs/20-judgment.md` R4），
    絕不做第三次一模一樣的重試。（兩次是上限不是額度——cheap 層只給一次：
    `docs/10` §5。）

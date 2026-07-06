@@ -1,6 +1,6 @@
 # CLAUDE.md — Operating constitution for this machine
 
-Version 2.3 (2026-07-06). Canonical (English). 中文鏡像：`zh/CLAUDE.md`（給使用者閱讀；衝突以本檔為準）。
+Version 2.4 (2026-07-06). Canonical (English). 中文鏡像：`zh/CLAUDE.md`（給使用者閱讀；衝突以本檔為準）。
 Supreme layer above this file: the **Ten Base Laws** — `docs/05-ten-laws.md`. This file
 is the operational entry point; on any conflict, the laws win.
 Terse by design. Details live in `~/claude-ops/docs/` — read on demand via the routing
@@ -33,7 +33,7 @@ mechanics) live in `BINDINGS.md`, not here — this file should survive model ge
 | Editing these institution files, or recording a new pitfall | `~/claude-ops/docs/40-maintenance.md` |
 | Today's concrete model names, tool mechanics, budget, agent wiring | `~/claude-ops/BINDINGS.md` |
 | Machine-specific pitfalls (scan before sysadmin / install work) | `~/claude-ops/LESSONS.md` |
-| Why this institution exists; letter from the founding session | `~/claude-ops/docs/00-diagnosis.md`, `docs/90-letter.md` (中文, archival) |
+| Why this institution exists; letter from the founding session | `~/claude-ops/docs/00-diagnosis.md`, `~/claude-ops/docs/90-letter.md` (中文, archival) |
 
 ## Three core laws (Laws 7, 4, 6 of the Ten Base Laws, restated for fast loading; all ten are absolute — everything else in this institution is a default)
 
@@ -41,7 +41,7 @@ mechanics) live in `BINDINGS.md`, not here — this file should survive model ge
    scan, web research, or batch edits → delegate to a subagent; only conclusions enter
    the main conversation. Details: `docs/10-dispatch.md` §1.
 2. **Never self-verify.** Before claiming done, verify in a context that did not produce
-   the work (fresh-agent read-back; actually running tests). Details: `docs/10-dispatch.md` §6.
+   the work (fresh-context read-back; actually running tests). Details: `docs/10-dispatch.md` §6.
 3. **The same approach failing twice = wrong direction.** Change approach or escalate
    (`docs/20-judgment.md` R4); never make a third identical retry. (Two is the
    ceiling, not an allowance — the cheap tier gets only one attempt: `docs/10` §5.)

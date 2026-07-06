@@ -1,6 +1,6 @@
 # 20 — 判斷力 rubric（中文鏡像）
 
-鏡像 en v2.2（2026-07-06）。權威版：`docs/20-judgment.md`（英文），衝突以英文版為準。
+鏡像 en v2.3（2026-07-06）。權威版：`docs/20-judgment.md`（英文），衝突以英文版為準。
 用法：情境符合標題就讀該段、逐條核對。每條附正例（✅）與反例（❌）。
 不確定自己等級 → 全部照 checklist 走。「cheap/standard/strong」層級對應見 `BINDINGS.md`。
 
@@ -56,7 +56,8 @@
 自動化要繞過此規則，須按行為類別各自取得書面常設豁免。
 
 長期豁免：使用者可以**白紙黑字寫在制度檔裡**預先授權特定項目（例：
-`docs/40-maintenance.md` §5 的 push 預授權、§1 的 `.bak` 清理）。豁免只在
+`BINDINGS.md` §Standing exemptions 的 push 預授權、`docs/40-maintenance.md` §1 的
+`.bak` 清理）。豁免只在
 書面範圍內有效——不准擴大解釋。
 
 **不該問（自己決定，事後回報）：**

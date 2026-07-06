@@ -1,27 +1,44 @@
 ---
 name: dispatching
-description: Use BEFORE delegating work to subagents, or when deciding between doing a task in the main conversation and dispatching it. Covers delegate-vs-DIY thresholds, model tier selection, the three-part delegation contract, escalation ladders, and the report contract. Triggers - about to spawn an agent, reading many files, repo-wide scans, web research, batch edits, a subagent failed and you are considering a retry.
+description: Use when about to dispatch a subagent, pick a model tier, decide delegate-vs-DIY, or accept a subagent's result - and when a dispatched task failed and you are deciding whether to retry, escalate, or stop.
 ---
 
-# Dispatching discipline
+# Dispatch card
 
-The full authority is the constitution's dispatch doc. Read it now:
-`~/claude-ops/docs/10-dispatch.md` if it exists, else `docs/10-dispatch.md` under
-this plugin's root. For delegation prompt templates (search / implement / refactor /
-research / review), also read `docs/30-templates.md` at the same location before
-writing the dispatch prompt.
+This card is the operative core. It usually suffices — read the full authority
+(`~/claude-ops/docs/10-dispatch.md` if it exists, else `docs/10-dispatch.md` under
+this plugin's root) **only** for the specific section named when a situation
+exceeds the card. On any conflict: doc wins over card; the Ten Base Laws
+(`skills/ten-laws`) win over both.
 
-Non-negotiable minimums while you work (even before reading the docs):
+**Delegate if ANY** (else DIY): ≥3 full-file reads · repo-wide scan · web research
+(≥2 pages) · same-pattern edits across ≥3 files · >100 lines of raw material would
+enter the main conversation. DIY if: 2–3 tool calls suffice · editing 1–2
+already-read files · user is asking, not tasking. (Edge cases: doc §1.)
 
-1. **Delegate the grunt work**: reading ≥3 files in full, repo-wide scans, web
-   research, batch edits — a subagent does it; only conclusions enter the main
-   conversation.
-2. **Never dispatch without the three-part contract**: goal & motivation /
-   mechanically checkable acceptance criteria / report format (conclusions +
-   `path:line` pointers, long artifacts to files).
-3. **Escalation is capped**: cheap tier gets 1 attempt, standard and strong get 2
-   each, at most two tiers per task — then stop and report with the full failure
-   trail. Never a third identical retry.
-4. **Verify with a fresh context**, never with the one that produced the work.
-5. Current tier→model bindings live in `BINDINGS.md` next to the docs — don't
-   hardcode model names from memory.
+**Every dispatch prompt has three parts** (templates: `docs/30-templates.md`):
+goal+motivation · mechanically checkable acceptance criteria · report format.
+Missing one → don't dispatch. Always pass an explicit `model`/tier — silent
+inheritance of an expensive main model is selecting it.
+
+**Tiers** (today's names: `BINDINGS.md` — don't hardcode from memory): cheap =
+keyword locate / apply a solved pattern; standard = default workhorse (search,
+implement, refactor, research, review); strong = escalation / architecture /
+second opinion only. Never pick the special tier on your own initiative.
+
+**Report contract** (paste into prompts): conclusions + `path:line` pointers only,
+no raw content; >30 lines → file + 3-line summary; end with did / skipped+why /
+verification level.
+
+**Escalation ladder** (details/examples: doc §5): cheap gets 1 attempt, standard
+and strong 2 each; max two tiers per task, then STOP and report. Escalate only
+with the full failure trail attached. Cracked a repeatable pattern → write steps,
+de-escalate for batch application. Never a third identical retry.
+
+**Acceptance** (doc §6): never self-verify. Files → fresh-agent read-back
+(`verifier`). Code → verifier or main conversation re-runs the test command
+itself; the producer's pasted transcript never counts. Acceptance failure = a
+failed attempt.
+
+**Spend gates** (doc §7, authoritative): ≥3 parallel agents or multi-round strong
+→ ask the user first. Verification is never cut for savings.

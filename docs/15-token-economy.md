@@ -1,6 +1,6 @@
 # 15 — Token economy (context hygiene for the main conversation)
 
-Version 1.1 (2026-07-06). Canonical (English); 中文鏡像 `zh/15-token-economy.md`.
+Version 1.2 (2026-07-06). Canonical (English); 中文鏡像：`zh/15-token-economy.md`.
 `docs/10-dispatch.md` already covers the dispatch side (delegate grunt work, report
 contracts, tier order). This file covers what the **main conversation itself** must
 do. Budget context: `BINDINGS.md` §Budget.
@@ -47,8 +47,8 @@ do. Budget context: `BINDINGS.md` §Budget.
   institution itself was built this way: every finished piece lands on disk before
   the next starts). If the session dies, files are what survives.
 - **Write a handoff file before any operation you cannot redo cheaply**
-  (`commands/handoff.md` shape: goal / done+evidence / in-flight / failure trails /
-  next step). "Feeling the bloat" is **not** the trigger — the counter (subtask
+  (`commands/handoff.md` shape: goal / done+evidence / in-flight /
+  unverified-uncertain / failure trails / next step). "Feeling the bloat" is **not** the trigger — the counter (subtask
   count / token count) is.
 - Finish the current scope before accepting new scope into the same session.
 

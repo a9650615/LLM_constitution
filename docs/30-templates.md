@@ -1,6 +1,8 @@
 # 30 — Delegation prompt templates
 
-Version 2.1 (2026-07-06). Canonical (English); 中文鏡像 `zh/30-templates.md`.
+Version 2.2 (2026-07-06). Canonical (English); 中文鏡像：`zh/30-templates.md`
+(the mirror condenses the templates to prose — dispatch prompts use the English
+templates here, to save tokens; the mirror only explains them to the user).
 Usage: first confirm delegation is warranted (`docs/10-dispatch.md` §1) and pick the
 subagent type + tier (§3), then copy the matching template and fill the `{…}` blanks.
 Paste the whole block into the Agent tool `prompt` param. Each template already embeds
@@ -11,7 +13,7 @@ Rules common to all templates:
 - Long artifacts go to files, report the path (temp → scratchpad; keepers → `{project dir}`).
 - Every report ends with: did / skipped + why / verification level.
 - Always pass an explicit `model`/tier on every dispatch — silent inheritance of a
-  premium main-session model is selecting it (Law 8, `docs/05-ten-laws.md`).
+  strong-or-higher main-session model is selecting it (Law 8, `docs/05-ten-laws.md`).
 - A producing agent's pasted test output is a claim, not acceptance: the verifier or
   the main conversation must re-run the test command itself (`docs/10-dispatch.md` §6).
 

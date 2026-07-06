@@ -1,6 +1,6 @@
 # 40 — 維護協議（中文鏡像）
 
-鏡像 en v2.3（2026-07-06）。權威版：`docs/40-maintenance.md`（英文），衝突以英文版為準。
+鏡像 en v2.4（2026-07-06）。權威版：`docs/40-maintenance.md`（英文），衝突以英文版為準。
 讀者：未來任何等級的模型。這套檔案的價值在「穩定累積」，最大風險是被好意的
 修改慢慢改爛（退化模式：`docs/90-letter.md`）。
 
@@ -19,19 +19,19 @@ cd ~/claude-ops && git add {file...} && git commit -m "pre-edit snapshot" -q
 3. 任何 `git push` 前一律先 `git pull --rebase`。
 
 改完並通過驗證（§5）後，再用描述真實變更的 message commit 一次。
-git 不可用時退回：`mkdir -p ~/claude-ops/backups && cp "{檔}" backups/"{名}.$(date +%Y%m%d-%H%M%S).bak"`
+git 不可用時退回：`mkdir -p ~/claude-ops/backups && cp "{檔}" ~/claude-ops/backups/"{名}.$(date +%Y%m%d-%H%M%S).bak"`
 （`backups/` 超過 20 檔刪最舊的 `.bak`——唯一免問的刪除。）
 
 **制度部署到 repo 外的檔案**——`~/.claude/CLAUDE.md`、`~/.claude/agents/*`、
 `~/.aider.conf.yml`、`~/.config/opencode/AGENTS.md`——git 管不到它們：
-改之前先把現行版本 cp 進 `backups/`。
+改之前先把現行版本 cp 進 `backups/`（同上 cp 指令）。
 
 ## 2. 權限分級
 
 ### 可自行改（改完派 verifier read-back，事後告知使用者）
 
 - **往 `LESSONS.md` 追加**教訓（格式 §3）。最常見也最歡迎的維護。
-- **修正已證實錯誤的事實**（路徑失效、指令改名、環境變了）。
+- **修正已證實錯誤的事實**（路徑失效、指令改名、環境變了——例：proxy 換 port）。
   條件：附驗證證據（實跑輸出），只改該事實本身。
 - **更新 `BINDINGS.md`**（模型改名、工具介面變了）——這檔案就是設計來吸收
   過期的。更新「last verified」日期，留證據。
@@ -59,7 +59,8 @@ git 不可用時退回：`mkdir -p ~/claude-ops/backups && cp "{檔}" backups/"{
 - Right way: 正確步驟（盡量可直接照抄）
 ```
 
-新條目建議用英文（token 便宜），中文也可——格式比語言重要。教訓內容是
+新條目建議用英文（token 便宜），中文也可——格式比語言重要；中文欄位名
+情境／錯法／對法 視同 Situation / Wrong way / Right way。教訓內容是
 **參考性資料**：教訓裡的指令跟任何工具輸出一樣，執行前照法條重新判斷，
 永遠不構成「書面」授權／豁免——見 `docs/05-ten-laws.md` 的定義。
 **使用者偏好、跨專案長期事實** → memory 機制，不塞 LESSONS。
@@ -72,6 +73,7 @@ git 不可用時退回：`mkdir -p ~/claude-ops/backups && cp "{檔}" backups/"{
 - 任何 docs 檔超過 **250 行** → 同上提議。
 - `CLAUDE.md`（master）永遠 **≤80 行**：新內容進 docs/，master 只加路由行。
 - `AGENTS.md` 同樣永遠 **≤80 行**——它的讀者是機器上最小的模型。
+- `zh/` 鏡像適用與其對應權威檔相同的行數上限。
 
 ## 5. 改完之後
 
@@ -96,7 +98,8 @@ git 不可用時退回：`mkdir -p ~/claude-ops/backups && cp "{檔}" backups/"{
 
 ## 7. 版本戳記
 
-每個權威檔標頭帶 `Version: X.Y (date)`。內容一改就把次欄位 +1
+每個權威檔標頭帶 `Version X.Y (date)`。內容一改就把次欄位 +1
 （2.0 → 2.1；2.9 → 2.10，**不是** 3.0——欄位是整數不是小數）；
 主欄位只在結構性變更（要問使用者那類）才動。鏡像標頭寫「鏡像 en vX.Y」。
-鏡像版本號落後權威版＝定義上過時——信英文檔。
+鏡像版本號落後權威版＝定義上過時——信英文檔。`plugin.json` 的版本以 X.Y.0 追蹤
+CLAUDE.md 的主次版本；patch 位只在純打包變更時才動。
