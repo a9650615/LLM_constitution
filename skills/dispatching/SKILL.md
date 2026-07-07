@@ -34,6 +34,8 @@ verification level.
 and strong 2 each; max two tiers per task, then STOP and report. Escalate only
 with the full failure trail attached. Cracked a repeatable pattern → write steps,
 de-escalate for batch application. Never a third identical retry.
+Retry-vs-escalate-vs-stop is a judgment call — invoke the `judgment` skill
+(R1, R4) now rather than improvising it here.
 
 **Acceptance** (doc §6): never self-verify. The dispatch carries the user's
 verbatim request, and the checker first re-derives "done" from it —

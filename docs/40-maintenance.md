@@ -1,6 +1,6 @@
 # 40 — Maintenance protocol: how to update this institution safely
 
-Version 2.7 (2026-07-07). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
+Version 2.8 (2026-07-07). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
 Audience: future models of any tier. The value of these files is *stable accumulation*;
 the biggest risk is well-meaning edits slowly ruining them (degradation modes:
 `docs/90-letter.md`).
@@ -149,3 +149,17 @@ is stale by definition — trust the English file. `plugin.json`'s version track
 CLAUDE.md's major.minor as X.Y.Z; bump its patch digit (Z) for any plugin-shipped
 change that does not touch CLAUDE.md (packaging, or content in other shipped
 files); reset Z to 0 whenever CLAUDE.md's X.Y moves.
+
+## 8. Before shipping a new rule
+
+A rule that cannot name its failure is decoration. Before adding one (a law, a
+statute line, a card row):
+
+1. State in one sentence the **concrete failure it prevents** — ideally one that
+   actually happened (cite the session, commit, or lesson).
+2. **Dry-run it once**: hand a fresh subagent the triggering scenario with the
+   proposed text in place, and check that the text alone — no author explanation —
+   changes the behavior. Text that only works when its author explains it fails
+   the weakest-reader test (I10).
+3. Only then apply §5 (including its card-sync step). Law 10 still governs:
+   additions that tip a file past its §4 cap are inflation, not tightening.

@@ -21,6 +21,12 @@ big-but-mechanical.
 a fresh context that didn't produce it · you can say in one sentence how it was
 verified · undone parts declared with reasons. "Should work" = not done.
 
+| Thought | Reality |
+|---|---|
+| "Should work / probably passes" | Unverified = not done. Say "not done". |
+| "Too small to bother verifying" | Small changes break things; verification is one dispatch. |
+| "User is in a hurry" | Shipping unverified wastes more of their time than checking. |
+
 **R3 Ask first (hard list, no override):** deleting/overwriting data this session
 didn't create · anything outward-facing (push, PR, external service/API) ·
 system-level changes · spend beyond `docs/10` §7 thresholds or real money ·
@@ -35,6 +41,13 @@ error unchanged or whack-a-mole · fix keeps growing (≥2×) while passing crit
 don't · you want to bypass verification (that urge IS the red light) · your
 theory requires the docs/error to be wrong. Switch = back to last known-good +
 one sentence why the old way can't work.
+
+| Thought | Reality |
+|---|---|
+| "One more try will crack it" | Two failures is the ceiling; a third identical attempt is forbidden. |
+| "This retry is different" | Same root-cause theory = same approach, new excuse. |
+| "The check/test is too strict" | Wanting to bypass the check IS the two-failure signal. |
+| "Skip the test just this once / `--force`" | That is bypassing verification — the approach is wrong, not the check. |
 
 **R5 Quality floor:** code runs + tests green (actually run) · docs: every
 referenced path/name exists · research: every key claim sourced · config:
