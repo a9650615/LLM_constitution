@@ -1,6 +1,6 @@
 # 40 — 維護協議（中文鏡像）
 
-鏡像 en v2.8（2026-07-07）。權威版：`docs/40-maintenance.md`（英文），衝突以英文版為準。
+鏡像 en v2.9（2026-07-07）。權威版：`docs/40-maintenance.md`（英文），衝突以英文版為準。
 讀者：未來任何等級的模型。這套檔案的價值在「穩定累積」，最大風險是被好意的
 修改慢慢改爛（退化模式：`docs/90-letter.md`）。
 
@@ -80,6 +80,9 @@ git 不可用時退回：`mkdir -p ~/claude-ops/backups && cp "{檔}" ~/claude-o
 - 任何 docs 檔超過 **250 行** → 同上提議。
 - `CLAUDE.md`（master）永遠 **≤80 行**：新內容進 docs/，master 只加路由行。
 - `AGENTS.md` 同樣永遠 **≤80 行**——它的讀者是機器上最小的模型。
+- Skill card（`skills/*/SKILL.md`）每張 **≤80 行**：card 是 progressive
+  disclosure 的第一線，一張超過一頁的 card 已經變成它本該摘要的 doc——
+  把內容下放進 doc，card 留指標。
 - `zh/` 鏡像適用與其對應權威檔相同的行數上限。
 
 ## 5. 改完之後

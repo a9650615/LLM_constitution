@@ -1,6 +1,6 @@
 # 40 — Maintenance protocol: how to update this institution safely
 
-Version 2.8 (2026-07-07). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
+Version 2.9 (2026-07-07). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
 Audience: future models of any tier. The value of these files is *stable accumulation*;
 the biggest risk is well-meaning edits slowly ruining them (degradation modes:
 `docs/90-letter.md`).
@@ -105,6 +105,10 @@ not here.
   goes into docs/, CLAUDE.md gets only a routing line.
 - `AGENTS.md` stays **≤80 lines** forever, for the same reason — its readers are the
   smallest models on the machine.
+- Skill cards (`skills/*/SKILL.md`) stay **≤80 lines** each: they are the
+  progressive-disclosure front line, and a card that outgrows a page has become
+  the doc it was supposed to summarize — move content down into the doc and keep
+  the pointer.
 - `zh/` mirrors are held to the same caps as the canonical file they mirror.
 
 ## 5. After editing

@@ -51,6 +51,10 @@ for f in docs/[0-9]*.md zh/[0-9]*.md; do
   n=$(wc -l < "$f")
   [ "$n" -gt 250 ] && err "$f: $n lines (cap 250)"
 done
+for f in skills/*/SKILL.md; do
+  n=$(wc -l < "$f")
+  [ "$n" -gt 80 ] && err "$f: $n lines (cap 80, docs/40 §4)"
+done
 
 [ "$fail" -eq 0 ] && echo "lint OK"
 exit "$fail"
