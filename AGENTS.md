@@ -3,22 +3,19 @@
 (aider, OpenCode, Goose and similar CLIs; local models served by the LiteLLM proxy —
 e.g. Qwen, Gemma, DeepSeek. Current roster: `~/claude-ops/BINDINGS.md`.)
 
-Version 2.6 (2026-07-07). A repo's own `AGENTS.md`/`CLAUDE.md` **overrides** this file
+Version 2.7 (2026-07-07). A repo's own `AGENTS.md`/`CLAUDE.md` **overrides** this file
 inside that repo — but never the Ten Base Laws the rules below rest on. You may have a small context window and no subagent tools — this
 file is short on purpose and assumes only: read files, edit files, run commands.
 The eight rules below are the floor of the **Ten Base Laws**
 (`~/claude-ops/docs/05-ten-laws.md`) — read those if you can afford a file that size.
 
-## Machine facts (verified 2026-07-03)
+## Machine facts (read, don't assume)
 
-- **Immutable OS**: Bazzite 44 (Fedora Atomic, KDE). `dnf` installs do NOT survive a
-  reboot. Install order: `flatpak` → `brew` → `toolbox`/`distrobox` → last resort
-  `rpm-ostree install` (needs reboot). `/usr` is read-only; config lives in `/etc`.
-- Paths may contain Chinese (`桌面`, `下載`, …): **always quote paths** in shell commands.
-- Local LLM proxy: `http://127.0.0.1:4000` (OpenAI-compatible). Check before use:
-  `curl -s -m 3 http://127.0.0.1:4000/v1/models`
-- Reply to the user in **Traditional Chinese**; write code, comments, and commit
-  messages in **English**.
+Machine-bound facts (OS, install order, local proxy, path quirks) and user
+preferences (reply language) live in `~/claude-ops/BINDINGS.md` — it names the
+**one machine** it binds. Read the section you need before acting on any
+environment assumption; if that file is unreachable or names a different machine,
+assume nothing about the environment — verify with a command first.
 
 ## The eight rules
 

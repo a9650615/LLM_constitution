@@ -65,3 +65,9 @@ statutes），不能覆寫基本法本身。
 
 2026-07-06 補記二：上文「修法 3」所指的「維護協議 §memory」一節已不存在；
 現行權威位置為 `BINDINGS.md` §Memory routing。
+
+2026-07-07 補記三：上文病灶一所述「環境事實寫死在 `~/claude-ops/CLAUDE.md`」的
+設計已修正——機器事實自 CLAUDE.md 與 AGENTS.md 全數遷入 `BINDINGS.md`
+§Machine environment（機器綁定層，標頭點名其綁定的機器）；CLAUDE.md 自 v2.5
+起不含任何機器事實，任何機器通用。原設計在 repo 被 clone 到他機時，會把創始
+機器的事實當真相餵給該機的 session——本次遷移即為堵此漏。

@@ -6,6 +6,15 @@ changes that don't touch it). Every `plugin.json` bump ships with an entry here
 (lint-enforced). Backfilled 2026-07-07 from git history; commit hashes are the
 authoritative detail.
 
+## [2.5.0] — 2026-07-07
+- Universality fix (user-identified category error): CLAUDE.md v2.5 and
+  AGENTS.md v2.7 no longer carry ANY machine facts — the Bazzite/proxy/install
+  facts moved into `BINDINGS.md` §Machine environment and §User preferences
+  (the per-machine perishable layer, which names the one machine it binds).
+  Universal files are now valid on any machine; a cloned repo can no longer
+  feed one machine's facts to sessions on another. Cross-references updated
+  (docs/15 v1.3, README, BINDINGS TTLs, docs/00 archival note).
+
 ## [2.4.11] — 2026-07-07
 - Fable-tier adversarial re-review: standing exemptions become a protected
   ask-first item (closes an authorization-laundering path through the freely

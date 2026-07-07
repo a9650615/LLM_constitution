@@ -1,6 +1,6 @@
 # BINDINGS.md — Perishable specifics (expected to rot; fix freely with evidence)
 
-Version 2.4 (2026-07-07), last verified on Claude Code 2.1.200.
+Version 2.5 (2026-07-07), last verified on Claude Code 2.1.200.
 The constitution (`CLAUDE.md`, `docs/`) is written against abstract tiers and should
 survive years. This file binds those tiers to today's concrete names — it will NOT
 survive years, by design. **When reality disagrees with this file, reality wins**:
@@ -11,6 +11,22 @@ This file describes **ONE machine** (hostname/OS — record actual `uname -a` ou
 treat as placeholder if not yet captured). On a different machine, do not "fix" these
 facts to match reality — create that machine's own bindings file instead; the laws
 and docs are shared, bindings are per-machine.
+
+## Machine environment (verified 2026-07-03 on the founding machine; moved here from CLAUDE.md/AGENTS.md 2026-07-07)
+
+- **OS: Bazzite 44 (Kinoite) — immutable Fedora Atomic, KDE Plasma.** `dnf` installs
+  do NOT survive a reboot; treat it as unusable. Install order: `flatpak` → `brew` →
+  `toolbox`/`distrobox` → last resort `rpm-ostree install` (layered, needs a reboot).
+  `/usr` is read-only; config lives in `/etc`.
+- XDG dirs have Chinese names (`桌面`, `下載`, …) — **always quote paths** in shell
+  commands; prefer English paths under `$HOME` for new work.
+- **Local LLM proxy** `http://127.0.0.1:4000` (OpenAI-compatible). May be down —
+  check first: `curl -s -m 3 http://127.0.0.1:4000/v1/models`
+
+## User preferences (travel with the user, not the machine)
+
+- Reply to the user in **Traditional Chinese (zh-TW)**. Code, comments, and commit
+  messages: English.
 
 ## Model tiers → today's models (values for the Agent tool `model` param)
 
@@ -70,8 +86,8 @@ exemption counts only within its stated scope):
 
 ## Re-verification TTLs
 
-- Environment/machine facts (CLAUDE.md's "Environment facts" block and AGENTS.md's
-  "Machine facts" block): stale after **90 days**.
+- Environment/machine facts (this file's §Machine environment — CLAUDE.md and
+  AGENTS.md carry none since 2026-07-07): stale after **90 days**.
 - Model/tier tables (this file's "Model tiers" and "Local model roster"): stale after
   **30 days**.
 - Past TTL: run the relevant re-verification command (below) before relying on the

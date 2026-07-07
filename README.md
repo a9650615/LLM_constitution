@@ -57,8 +57,9 @@ Precedence, top to bottom — a lower layer never overrides a higher one:
 
 1. **`docs/05-ten-laws.md`** — the Ten Base Laws, the supreme layer. Editable only
    through an explicit protocol (proposal → user approval → fresh-context read-back).
-2. **`CLAUDE.md`** — operational entry point: environment facts, routing table, and
-   three of the laws restated for fast loading.
+2. **`CLAUDE.md`** — operational entry point: routing table and three of the laws
+   restated for fast loading. Universal by design — machine facts live in
+   `BINDINGS.md`, which names the one machine it binds.
 3. **`docs/10–40`** — operational statutes: dispatch, token economy, judgment,
    templates, maintenance. Defaults, overridable with a stated one-line reason —
    except the sections marked as law-elaborations, which may only be tightened.
