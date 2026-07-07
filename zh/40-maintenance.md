@@ -1,6 +1,6 @@
 # 40 — 維護協議（中文鏡像）
 
-鏡像 en v2.9（2026-07-07）。權威版：`docs/40-maintenance.md`（英文），衝突以英文版為準。
+鏡像 en v2.10（2026-07-07）。權威版：`docs/40-maintenance.md`（英文），衝突以英文版為準。
 讀者：未來任何等級的模型。這套檔案的價值在「穩定累積」，最大風險是被好意的
 修改慢慢改爛（退化模式：`docs/90-letter.md`）。
 
@@ -118,7 +118,9 @@ git 不可用時退回：`mkdir -p ~/claude-ops/backups && cp "{檔}" ~/claude-o
 主欄位只在結構性變更（要問使用者那類）才動。鏡像標頭寫「鏡像 en vX.Y」。
 鏡像版本號落後權威版＝定義上過時——信英文檔。`plugin.json` 的版本以 X.Y.Z 追蹤
 CLAUDE.md 的主次版本；凡不動 CLAUDE.md 的 plugin 隨附變更（打包、或其他隨附
-檔案的內容）就 bump patch 位（Z）；CLAUDE.md 的 X.Y 一動，Z 歸零。
+檔案的內容）就 bump patch 位（Z）；CLAUDE.md 的 X.Y 一動，Z 歸零。每次 bump
+plugin 版本必附該版的 `CHANGELOG.md` 條目（lint 強制）——已安裝的消費者只看得到
+版本號，changelog 才是它的意義。
 
 ## 8. 加新規則之前
 

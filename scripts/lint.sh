@@ -40,6 +40,10 @@ case "$plugin" in
   "$claude".*) ;;
   *) [ -n "$plugin" ] && err "plugin.json v$plugin does not track CLAUDE.md v$claude (rule: docs/40 §7)" ;;
 esac
+if [ -n "$plugin" ]; then
+  grep -q "^## \[$plugin\]" CHANGELOG.md 2>/dev/null || \
+    err "CHANGELOG.md has no entry for v$plugin (rule: docs/40 §7)"
+fi
 
 # 3. Size caps (docs/40 §4); archival docs/00 and docs/90 exempt
 for f in CLAUDE.md AGENTS.md zh/CLAUDE.md; do

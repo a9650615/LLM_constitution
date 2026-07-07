@@ -1,6 +1,6 @@
 # 40 — Maintenance protocol: how to update this institution safely
 
-Version 2.9 (2026-07-07). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
+Version 2.10 (2026-07-07). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
 Audience: future models of any tier. The value of these files is *stable accumulation*;
 the biggest risk is well-meaning edits slowly ruining them (degradation modes:
 `docs/90-letter.md`).
@@ -152,7 +152,9 @@ Mirrors carry "鏡像 en vX.Y" in their header. A mirror whose number lags its c
 is stale by definition — trust the English file. `plugin.json`'s version tracks
 CLAUDE.md's major.minor as X.Y.Z; bump its patch digit (Z) for any plugin-shipped
 change that does not touch CLAUDE.md (packaging, or content in other shipped
-files); reset Z to 0 whenever CLAUDE.md's X.Y moves.
+files); reset Z to 0 whenever CLAUDE.md's X.Y moves. Every plugin version bump
+ships with a `CHANGELOG.md` entry for that version (lint-enforced) — installed
+consumers see only the version number; the changelog is what it means.
 
 ## 8. Before shipping a new rule
 
