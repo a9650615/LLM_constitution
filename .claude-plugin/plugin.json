@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "llm-constitution",
-  "version": "2.4.4",
+  "version": "2.4.5",
   "description": "An operating constitution for AI coding agents. Supreme layer: the Ten Base Laws — invariant-grounded, precedence-ordered, model-agnostic. Below it: dispatch discipline (commander stays off grunt work), never-self-verify acceptance, escalation ladders, judgment rubrics with examples, and a perishable bindings layer that absorbs model-name rot.",
   "author": {
     "name": "birdyo",
