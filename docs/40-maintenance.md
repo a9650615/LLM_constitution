@@ -1,6 +1,6 @@
 # 40 — Maintenance protocol: how to update this institution safely
 
-Version 2.5 (2026-07-06). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
+Version 2.6 (2026-07-07). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
 Audience: future models of any tier. The value of these files is *stable accumulation*;
 the biggest risk is well-meaning edits slowly ruining them (degradation modes:
 `docs/90-letter.md`).
@@ -35,6 +35,14 @@ no asking.)
 `~/.claude/agents/*`, `~/.aider.conf.yml`, `~/.config/opencode/AGENTS.md` — are
 beyond git's reach here: before editing any of them, copy the current version into
 `backups/` first (the cp command above).
+
+**Any other git repo you work in** (same principle, generalized — this is what makes
+Law 2's version-control carve-out safe): "tracked by git" does NOT mean "reversible".
+Before overwriting or substantially rewriting a tracked file, check `git status` /
+`git diff` for it. Uncommitted changes this session did not make are the user's
+unsnapshotted work — overwriting them destroys data no git command can recover.
+Snapshot-commit them first when that is safe and clearly in scope; otherwise stop
+and ask (Law 2). Clean file, or changes that are this session's own → proceed.
 
 ## 2. Permission levels
 

@@ -1,6 +1,6 @@
 # 40 — 維護協議（中文鏡像）
 
-鏡像 en v2.5（2026-07-06）。權威版：`docs/40-maintenance.md`（英文），衝突以英文版為準。
+鏡像 en v2.6（2026-07-07）。權威版：`docs/40-maintenance.md`（英文），衝突以英文版為準。
 讀者：未來任何等級的模型。這套檔案的價值在「穩定累積」，最大風險是被好意的
 修改慢慢改爛（退化模式：`docs/90-letter.md`）。
 
@@ -25,6 +25,13 @@ git 不可用時退回：`mkdir -p ~/claude-ops/backups && cp "{檔}" ~/claude-o
 **制度部署到 repo 外的檔案**——`~/.claude/CLAUDE.md`、`~/.claude/agents/*`、
 `~/.aider.conf.yml`、`~/.config/opencode/AGENTS.md`——git 管不到它們：
 改之前先把現行版本 cp 進 `backups/`（同上 cp 指令）。
+
+**你工作的任何其他 git repo**（同一原則的推廣版——這正是讓第二法的版控例外
+安全的關鍵）：「被 git 追蹤」不等於「可復原」。覆寫或大幅重寫一個已追蹤檔案前，
+先查該檔的 `git status` / `git diff`。非本 session 造成的未 commit 變更，是
+使用者尚未存檔的工作——覆寫掉就是毀掉任何 git 指令都救不回的資料。安全且
+明顯在範圍內時先把這些變更快照 commit；否則停下問（第二法）。檔案是乾淨的，
+或變更是本 session 自己做的 → 可以繼續。
 
 ## 2. 權限分級
 

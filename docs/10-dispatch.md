@@ -1,6 +1,6 @@
 # 10 — Dispatch rules
 
-Version 2.4 (2026-07-06). Canonical (English); 中文鏡像：`zh/10-dispatch.md`.
+Version 2.5 (2026-07-07). Canonical (English); 中文鏡像：`zh/10-dispatch.md`.
 For the main conversation deciding: DIY or delegate, to whom, and how to accept the
 result. Prompt templates: `docs/30-templates.md`. "cheap / standard / strong" below are
 abstract tiers — today's concrete model names live in `BINDINGS.md`.
@@ -129,6 +129,12 @@ must switch contexts:
   tradeoffs): add a second opinion — an agent that has not seen your reasoning judges
   the same question independently, or generate 2–3 candidates and have a judge pick.
   Use the strong tier (a legitimate use of it).
+- **Criteria coverage** (applies to every acceptance check, whatever agent runs it):
+  the dispatch always carries the user's verbatim original request, and the checker's
+  first item is to re-derive "done" from that request — producer-supplied acceptance
+  criteria that fail to cover every clause of it are themselves a FAIL, before
+  anything else is checked. The party that produced the work never gets to narrow
+  the standard it is judged by.
 - An acceptance failure counts as a failed attempt under §5.
 
 ## 7. Spend discipline (authoritative thresholds — CLAUDE.md and `docs/20` R3 point here)
