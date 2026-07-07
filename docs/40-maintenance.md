@@ -1,6 +1,6 @@
 # 40 — Maintenance protocol: how to update this institution safely
 
-Version 2.6 (2026-07-07). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
+Version 2.7 (2026-07-07). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
 Audience: future models of any tier. The value of these files is *stable accumulation*;
 the biggest risk is well-meaning edits slowly ruining them (degradation modes:
 `docs/90-letter.md`).
@@ -109,14 +109,19 @@ not here.
 
 ## 5. After editing
 
-1. Dispatch `verifier` for a read-back: file complete; every referenced path and name
-   still actually exists.
+1. Run `scripts/lint.sh` — the mechanical half (mirror version parity, plugin
+   version rule §7, size caps §4). Then dispatch `verifier` for the semantic half:
+   file complete; every referenced path and name still actually exists.
 2. Tell the user what changed (one line is enough).
 3. If the change affects cross-references (renamed file, renumbered section), Grep
    `~/claude-ops/` and update every reference in the same session.
-4. Commit (§1), then `git push` (remote: see README) — push only under a standing
+4. If the edited content is summarized by a **skill card** (`docs/10` →
+   `skills/dispatching`, `docs/20` → `skills/judgment`, `docs/05` →
+   `skills/ten-laws`), update the card in the same session — a stale card
+   intercepts readers before they ever reach the corrected doc.
+5. Commit (§1), then `git push` (remote: see README) — push only under a standing
    exemption on record in `BINDINGS.md` §Standing exemptions.
-5. **Terminal fallback**: if no fresh context is available at all (no subagent tools,
+6. **Terminal fallback**: if no fresh context is available at all (no subagent tools,
    none reachable), a permissionless fact-fix (§2) may still be applied, but its
    commit message must carry `UNVERIFIED-READBACK`, and the next session that has
    subagents available must read it back.

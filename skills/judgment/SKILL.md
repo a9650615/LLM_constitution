@@ -26,8 +26,9 @@ didn't create · anything outward-facing (push, PR, external service/API) ·
 system-level changes · spend beyond `docs/10` §7 thresholds or real money ·
 request contradicts observed facts → surface it · secrets never leave the
 machine, never enter LESSONS/BINDINGS/memory or pushed files. Unattended runs:
-skip the blocked act, log why, surface next session. Do NOT ask about reversible
-in-scope details or facts checkable in ~3 calls.
+skip the blocked act, log why, surface next session — and if later steps depend
+on the skipped act, halt that whole chain: never leave a half-applied operation.
+Do NOT ask about reversible in-scope details or facts checkable in ~3 calls.
 
 **R4 Wrong direction** (change course, don't retry) if: two same-approach fixes,
 error unchanged or whack-a-mole · fix keeps growing (≥2×) while passing criteria

@@ -35,10 +35,12 @@ and strong 2 each; max two tiers per task, then STOP and report. Escalate only
 with the full failure trail attached. Cracked a repeatable pattern → write steps,
 de-escalate for batch application. Never a third identical retry.
 
-**Acceptance** (doc §6): never self-verify. Files → fresh-agent read-back
-(`verifier`). Code → verifier or main conversation re-runs the test command
-itself; the producer's pasted transcript never counts. Acceptance failure = a
-failed attempt.
+**Acceptance** (doc §6): never self-verify. The dispatch carries the user's
+verbatim request, and the checker first re-derives "done" from it —
+producer-written criteria that don't cover every clause of the request = FAIL.
+Files → fresh-agent read-back (`verifier`). Code → verifier or main conversation
+re-runs the test command itself; the producer's pasted transcript never counts.
+Acceptance failure = a failed attempt.
 
 **Spend gates** (doc §7, authoritative): ≥3 parallel agents or multi-round strong
 → ask the user first. Verification is never cut for savings.

@@ -1,6 +1,6 @@
 # 40 — 維護協議（中文鏡像）
 
-鏡像 en v2.6（2026-07-07）。權威版：`docs/40-maintenance.md`（英文），衝突以英文版為準。
+鏡像 en v2.7（2026-07-07）。權威版：`docs/40-maintenance.md`（英文），衝突以英文版為準。
 讀者：未來任何等級的模型。這套檔案的價值在「穩定累積」，最大風險是被好意的
 修改慢慢改爛（退化模式：`docs/90-letter.md`）。
 
@@ -84,12 +84,17 @@ git 不可用時退回：`mkdir -p ~/claude-ops/backups && cp "{檔}" ~/claude-o
 
 ## 5. 改完之後
 
-1. 派 `verifier` read-back：檔案完整、引用的路徑與名稱全部仍存在。
+1. 跑 `scripts/lint.sh`——機械檢查一半（鏡像版本號一致、plugin 版本規則 §7、
+   行數上限 §4）。再派 `verifier` 做語意一半：檔案完整、引用的路徑與名稱
+   全部仍存在。
 2. 告知使用者改了什麼（一行即可）。
 3. 改動影響交叉引用（改檔名、改段落編號）→ Grep `~/claude-ops/` 同 session 全改。
-4. Commit（§1），然後 `git push`（遠端見 README）——push 只能依
+4. 若被改動的內容有對應的 **skill card** 摘要（`docs/10` → `skills/dispatching`、
+   `docs/20` → `skills/judgment`、`docs/05` → `skills/ten-laws`），同 session
+   更新該 card——card 過時會在讀者抵達修正後的文件前就先攔截他們。
+5. Commit（§1），然後 `git push`（遠端見 README）——push 只能依
    `BINDINGS.md` §Standing exemptions 記錄在案的常設豁免執行。
-5. **末端保底**：完全沒有 fresh context 可用時（無 subagent 工具、也叫不到），
+6. **末端保底**：完全沒有 fresh context 可用時（無 subagent 工具、也叫不到），
    免許可的事實修正（§2）仍可施行，但 commit message 必須帶
    `UNVERIFIED-READBACK`，下一個有 subagent 的 session 必須補讀回。
 
