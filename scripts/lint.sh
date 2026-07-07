@@ -45,17 +45,27 @@ if [ -n "$plugin" ]; then
     err "CHANGELOG.md has no entry for v$plugin (rule: docs/40 §7)"
 fi
 
-# 3. Size caps (docs/40 §4); archival docs/00 and docs/90 exempt
+# 3. Size caps (docs/40 §4); archival docs/00 and docs/90 exempt.
+# Guard every loop against dead globs/renames: a missing file is a FAIL, not a
+# silent skip — otherwise one directory rename deletes a whole check class.
 for f in CLAUDE.md AGENTS.md zh/CLAUDE.md; do
+  [ -f "$f" ] || { err "$f: missing (cap check skipped)"; continue; }
   n=$(wc -l < "$f")
   [ "$n" -gt 80 ] && err "$f: $n lines (cap 80)"
 done
 for f in docs/[0-9]*.md zh/[0-9]*.md; do
   case "$f" in docs/00-*|docs/90-*) continue ;; esac
+  [ -f "$f" ] || { err "glob dead: $f matched no file"; continue; }
   n=$(wc -l < "$f")
   [ "$n" -gt 250 ] && err "$f: $n lines (cap 250)"
 done
+# Known cards are named explicitly (same pattern as the mirror pairs above):
+# a glob alone cannot see a card that vanished — it just matches the survivors.
+for f in skills/dispatching/SKILL.md skills/judgment/SKILL.md skills/ten-laws/SKILL.md; do
+  [ -f "$f" ] || err "$f: missing (known card gone — rename or deletion?)"
+done
 for f in skills/*/SKILL.md; do
+  [ -f "$f" ] || { err "glob dead: $f matched no file"; continue; }
   n=$(wc -l < "$f")
   [ "$n" -gt 80 ] && err "$f: $n lines (cap 80, docs/40 §4)"
 done

@@ -37,9 +37,11 @@ de-escalate for batch application. Never a third identical retry.
 Retry-vs-escalate-vs-stop is a judgment call — invoke the `judgment` skill
 (R1, R4) now rather than improvising it here.
 
-**Acceptance** (doc §6): never self-verify. The dispatch carries the user's
-verbatim request, and the checker first re-derives "done" from it —
-producer-written criteria that don't cover every clause of the request = FAIL.
+**Acceptance** (doc §6): never self-verify. The dispatch carries the request it
+serves verbatim (a subtask: its own contract; joint coverage of the user's request
+is the decomposer's check), and the checker first re-derives "done" from it —
+producer-written criteria that don't cover every clause = FAIL, and so is a
+paraphrase that narrows the user's words.
 Files → fresh-agent read-back (`verifier`). Code → verifier or main conversation
 re-runs the test command itself; the producer's pasted transcript never counts.
 Acceptance failure = a failed attempt.

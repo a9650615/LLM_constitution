@@ -6,6 +6,19 @@ changes that don't touch it). Every `plugin.json` bump ships with an entry here
 (lint-enforced). Backfilled 2026-07-07 from git history; commit hashes are the
 authoritative detail.
 
+## [2.4.11] — 2026-07-07
+- Fable-tier adversarial re-review: standing exemptions become a protected
+  ask-first item (closes an authorization-laundering path through the freely
+  editable BINDINGS); criteria-coverage rule gains subtask scoping (closes a
+  decomposition deadlock); skill-card edits restricted to restating their doc;
+  §8 dry-runs must be recorded for the read-back verifier; §5 requires
+  confirming CI green after push; lint guards against dead globs.
+- Autonomous floor recorded in BINDINGS (measured: gemma3:4b passes the 4
+  adversarial scenarios, qwen2.5:1.5b fails dangerously) with
+  `scripts/floor-test.sh` as the re-verification method; enforcement placed on
+  the dispatcher and tool wiring (docs/10 §3, AGENTS.md orchestrator section) —
+  never on instructions to the sub-floor model itself.
+
 ## [2.4.10] — 2026-07-07
 - CI: GitHub Actions runs `scripts/lint.sh` on every push/PR — mechanical checks
   no longer depend on session discipline.

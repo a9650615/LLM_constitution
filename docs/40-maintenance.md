@@ -1,6 +1,6 @@
 # 40 — Maintenance protocol: how to update this institution safely
 
-Version 2.10 (2026-07-07). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
+Version 2.11 (2026-07-07). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
 Audience: future models of any tier. The value of these files is *stable accumulation*;
 the biggest risk is well-meaning edits slowly ruining them (degradation modes:
 `docs/90-letter.md`).
@@ -66,6 +66,9 @@ and ask (Law 2). Clean file, or changes that are this session's own → proceed.
   read-back (not just path-existence) before commit.
 - Changing or deleting the **three core laws** (CLAUDE.md) or the **hard ask-first
   list** (`docs/20-judgment.md` R3).
+- Adding to, changing, or rescoping **`BINDINGS.md` §Standing exemptions** — an
+  exemption is an authorization, not a fact; BINDINGS' "fix freely" rule does not
+  reach that section. It enters only as a user-approved edit (docs/05 "in writing" (a)).
 - Changing **threshold numbers** in `docs/10-dispatch.md` (files-before-delegating,
   retry counts, tier defaults) — these were deliberately calibrated; one session's
   experience is not enough to overturn them.
@@ -122,9 +125,14 @@ not here.
 4. If the edited content is summarized by a **skill card** (`docs/10` →
    `skills/dispatching`, `docs/20` → `skills/judgment`, `docs/05` →
    `skills/ten-laws`), update the card in the same session — a stale card
-   intercepts readers before they ever reach the corrected doc.
+   intercepts readers before they ever reach the corrected doc. Card edits may
+   only **restate the doc**: a card line with no doc counterpart is a new rule
+   (§8 applies, §2 if it loosens); trimming a card is re-summarizing only while
+   the doc still carries the content — otherwise it deletes a rule (ask first).
 5. Commit (§1), then `git push` (remote: see README) — push only under a standing
-   exemption on record in `BINDINGS.md` §Standing exemptions.
+   exemption on record in `BINDINGS.md` §Standing exemptions. After the push,
+   confirm CI is green (e.g. `gh run list -L1`) — a red main is a stop-work item:
+   fix or revert before shipping anything else.
 6. **Terminal fallback**: if no fresh context is available at all (no subagent tools,
    none reachable), a permissionless fact-fix (§2) may still be applied, but its
    commit message must carry `UNVERIFIED-READBACK`, and the next session that has
@@ -166,6 +174,9 @@ statute line, a card row):
 2. **Dry-run it once**: hand a fresh subagent the triggering scenario with the
    proposed text in place, and check that the text alone — no author explanation —
    changes the behavior. Text that only works when its author explains it fails
-   the weakest-reader test (I10).
+   the weakest-reader test (I10). Record the dry-run's transcript where the §5
+   read-back verifier will see it (commit message or a committed note): the
+   fresh-context read-back re-judges the dry-run — the author's own verdict on
+   their own scenario is not acceptance (Law 4).
 3. Only then apply §5 (including its card-sync step). Law 10 still governs:
    additions that tip a file past its §4 cap are inflation, not tightening.

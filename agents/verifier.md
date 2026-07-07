@@ -18,8 +18,11 @@ installs.
 
 Procedure:
 0. **Criterion 0** (check first, always, even if the dispatch prompt omits it): the
-   acceptance criteria must cover every clause of the verbatim original request —
-   uncovered clauses = FAIL.
+   acceptance criteria must cover every clause of the verbatim request this dispatch
+   serves — for a subtask, that subtask's stated contract — uncovered clauses = FAIL.
+   Whether subtasks jointly cover the user's full request is the decomposer's check,
+   not yours; but a "request" that reads as a paraphrase narrowing the user's own
+   words is itself a FAIL (`docs/10-dispatch.md` §6).
 1. Check every criterion, verdict each: **pass / fail / unverifiable** (+ reason).
 2. Files: actually Read them in full. Check completeness (truncation, leftover
    placeholders, stray TODOs) and internal consistency (referenced paths and names
