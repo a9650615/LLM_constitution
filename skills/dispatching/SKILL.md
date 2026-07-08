@@ -44,6 +44,9 @@ producer-written criteria that don't cover every clause = FAIL, and so is a
 paraphrase that narrows the user's words.
 Files → fresh-agent read-back (`verifier`). Code → verifier or main conversation
 re-runs the test command itself; the producer's pasted transcript never counts.
+Fresh context = a different agent, or an objective tool run (compiler/lint/tests
+executed) — the producer re-reading its own work in any form never qualifies; the
+check scales down in cost with the change, never down to self-inspection.
 Acceptance failure = a failed attempt.
 
 **Spend gates** (doc §7, authoritative): ≥3 parallel agents or multi-round strong

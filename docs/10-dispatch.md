@@ -1,6 +1,6 @@
 # 10 — Dispatch rules
 
-Version 2.7 (2026-07-08). Canonical (English); 中文鏡像：`zh/10-dispatch.md`.
+Version 2.8 (2026-07-08). Canonical (English); 中文鏡像：`zh/10-dispatch.md`.
 For the main conversation deciding: DIY or delegate, to whom, and how to accept the
 result. Prompt templates: `docs/30-templates.md`. "cheap / standard / strong" below are
 abstract tiers — today's concrete model names live in `BINDINGS.md`.
@@ -122,6 +122,14 @@ trail attached resets it **once per problem**; trail-less escalation is forbidde
 
 The producer's context carries the same biases that produced the bugs, so acceptance
 must switch contexts:
+
+- **What counts as a fresh context** (definition — small models read this literally):
+  a DIFFERENT agent that never saw the production process, or an objective tool run
+  (compiler, linter, test suite actually executed). The producer re-reading its own
+  work — in any form: re-opening the file, a "fresh view", re-reading the diff —
+  is still the producer, and never qualifies. The check may scale DOWN in cost with
+  the change (a one-character fix: a lint/build/test run suffices; no verifier
+  dispatch needed) but never down to self-inspection.
 
 - **Files**: dispatch `verifier` (or any fresh-context subagent) to read back — it never saw
   the writing process; it judges the file itself: complete? spec satisfied?

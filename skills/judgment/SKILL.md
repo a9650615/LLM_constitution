@@ -18,8 +18,10 @@ was a bad prompt (fix it; cheap-tier re-dispatch goes to standard) or the task i
 big-but-mechanical.
 
 **R2 Done** = ALL: every clause of the original request has output · verified by
-a fresh context that didn't produce it · you can say in one sentence how it was
-verified · undone parts declared with reasons. "Should work" = not done.
+a fresh context that didn't produce it (= a different agent, or an actual tool run
+— compiler/lint/tests executed; the producer re-reading its own work in any form
+never counts) · you can say in one sentence how it was verified · undone parts
+declared with reasons. "Should work" = not done.
 
 | Thought | Reality |
 |---|---|

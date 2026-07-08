@@ -6,6 +6,16 @@ changes that don't touch it). Every `plugin.json` bump ships with an entry here
 (lint-enforced). Backfilled 2026-07-07 from git history; commit hashes are the
 authoritative detail.
 
+## [2.6.1] — 2026-07-08
+- "Fresh context" gets an explicit definition (docs/10 v2.8 §6, mirrored in the
+  dispatching and judgment cards): a different agent OR an objective tool run
+  (compiler/lint/tests executed); the producer re-reading its own work in any
+  form never qualifies; the check scales down in cost, never to self-inspection.
+  Shipped per docs/40 §8: concrete failure was a live Haiku comprehension test
+  (it read "fresh context" as "re-open the file in a fresh view" — self-verify
+  in disguise); the fixed text was dry-run against Haiku, which then ruled
+  correctly, including the no-automated-checks → dispatch-verifier edge case.
+
 ## [2.6.0] — 2026-07-08
 - Universality sweep round 2 (user-identified stray): three user/machine-bound
   facts still lived in universal files. `~/aipc-strix-halo` example dropped from
