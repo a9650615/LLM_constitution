@@ -6,6 +6,13 @@ changes that don't touch it). Every `plugin.json` bump ships with an entry here
 (lint-enforced). Backfilled 2026-07-07 from git history; commit hashes are the
 authoritative detail.
 
+## [2.7.2] — 2026-07-08
+- Closed-loop audit (fresh-context verifier, five criteria): routing-table targets,
+  cross-references, plugin structure, and version consistency all pass. One dangling
+  reference found and repaired — `archive/90-letter.md:30` still pointed at
+  `docs/00-diagnosis.md` after the v2.7.0 archive move; fixed by errata append at
+  file end (original line untouched, per docs/40 §6 append-only). Commit `ebf17e4`.
+
 ## [2.7.1] — 2026-07-08
 - Universal content promoted out of the Chinese archive (user-identified gap):
   the founding letter's degradation modes A–D existed only in `archive/90-letter.md`
