@@ -1,6 +1,6 @@
 # 10 — Dispatch rules
 
-Version 2.8 (2026-07-08). Canonical (English); 中文鏡像：`zh/10-dispatch.md`.
+Version 2.9 (2026-07-08). Canonical (English); 中文鏡像：`zh/10-dispatch.md`.
 For the main conversation deciding: DIY or delegate, to whom, and how to accept the
 result. Prompt templates: `docs/30-templates.md`. "cheap / standard / strong" below are
 abstract tiers — today's concrete model names live in `BINDINGS.md`.
@@ -14,7 +14,7 @@ loosen them.
 
 Main-conversation context is the most expensive resource — it holds the user's original
 request and overall progress; flood it with raw material and those get summarized away
-first (`docs/00-diagnosis.md`, ailment 2).
+first (`archive/00-diagnosis.md`, ailment 2).
 
 **Delegate to a subagent if ANY of these holds:**
 

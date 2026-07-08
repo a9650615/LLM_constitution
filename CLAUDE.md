@@ -1,6 +1,6 @@
 # CLAUDE.md — Operating constitution
 
-Version 2.6 (2026-07-08). Canonical (English). 中文鏡像：`zh/CLAUDE.md`（給使用者閱讀；衝突以本檔為準）。
+Version 2.7 (2026-07-08). Canonical (English). 中文鏡像：`zh/CLAUDE.md`（給使用者閱讀；衝突以本檔為準）。
 Supreme layer above this file: the **Ten Base Laws** — `docs/05-ten-laws.md`. This file
 is the operational entry point; on any conflict, the laws win.
 Terse by design. Details live in `~/claude-ops/docs/` — read on demand via the routing
@@ -31,7 +31,7 @@ and ask before big spends (sole authoritative thresholds: `docs/10-dispatch.md` 
 | Editing these institution files, or recording a new pitfall | `~/claude-ops/docs/40-maintenance.md` |
 | Today's concrete model names, tool mechanics, budget, machine facts, user preferences, agent wiring | `~/claude-ops/BINDINGS.md` |
 | Machine-specific pitfalls (scan before sysadmin / install work) | `~/claude-ops/LESSONS.md` |
-| Why this institution exists; letter from the founding session | `~/claude-ops/docs/00-diagnosis.md`, `~/claude-ops/docs/90-letter.md` (中文, archival) |
+| Why this institution exists; letter from the founding session | `~/claude-ops/archive/00-diagnosis.md`, `~/claude-ops/archive/90-letter.md` (中文, archival) |
 
 ## Three core laws (Laws 7, 4, 6 of the Ten Base Laws, restated for fast loading; all ten are absolute — everything else in this institution is a default)
 

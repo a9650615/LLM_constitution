@@ -1,6 +1,6 @@
 # 15 — Token 經濟（主對話的 context 衛生）（中文鏡像）
 
-鏡像 en v1.3（2026-07-07）。權威版：`docs/15-token-economy.md`（英文），衝突以英文版為準。
+鏡像 en v1.4（2026-07-08）。權威版：`docs/15-token-economy.md`（英文），衝突以英文版為準。
 `docs/10-dispatch.md` 管的是派工側（工人活外包、回報合約、層級順序）；
 本檔管**主對話自己**該做的。額度背景：`BINDINGS.md` §Budget。
 
@@ -13,7 +13,7 @@
   fresh agent 的工作，不是你的）。
 - **開場信任記錄在案的機器事實**（`BINDINGS.md` §Machine environment——但先確認
   該檔綁定的就是你所在的機器）。重新探索機器（查 OS、找工具）每次燒 10–30 次
-  工具呼叫，是歷史上最大的漏洞（`docs/00-diagnosis.md` 病灶一）；反過來，
+  工具呼叫，是歷史上最大的漏洞（`archive/00-diagnosis.md` 病灶一）；反過來，
   信了他機的事實是另一種失敗。
 - 預計要讀 ≥3 個檔案全文？那是派工的領域——`docs/10-dispatch.md` §1。
 

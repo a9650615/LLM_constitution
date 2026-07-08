@@ -1,6 +1,6 @@
 # CLAUDE.md — 工作憲法（中文鏡像）
 
-鏡像 en v2.6（2026-07-08）。權威版：`~/claude-ops/CLAUDE.md`（英文）——
+鏡像 en v2.7（2026-07-08）。權威版：`~/claude-ops/CLAUDE.md`（英文）——
 衝突以英文版為準；本檔給使用者閱讀。若本檔標的版本號落後英文版，代表內容過時。
 
 本檔之上的最高層：**十條基本法**——`docs/05-ten-laws.md`（中文：`zh/05-ten-laws.md`）。
@@ -31,7 +31,7 @@
 | 要改制度檔、或踩了新坑要記錄 | `docs/40-maintenance.md` |
 | 今天的具體模型名、工具機制、額度、機器事實、使用者偏好、接線狀態 | `BINDINGS.md` |
 | 本機踩坑紀錄（動系統設定、裝軟體前掃一眼） | `LESSONS.md` |
-| 想了解制度為何存在、創始 session 的信 | `docs/00-diagnosis.md`、`docs/90-letter.md`（中文，存檔） |
+| 想了解制度為何存在、創始 session 的信 | `archive/00-diagnosis.md`、`archive/90-letter.md`（中文，存檔） |
 
 ## 核心三律（十條基本法之第七、四、六法的快速載入重述；十法皆絕對——制度裡其他一切都是預設值）
 

@@ -6,6 +6,20 @@ changes that don't touch it). Every `plugin.json` bump ships with an entry here
 (lint-enforced). Backfilled 2026-07-07 from git history; commit hashes are the
 authoritative detail.
 
+## [2.7.0] — 2026-07-08
+- Layout simplification (user-identified: the two archival files broke the
+  universal docs/ format and carried era-bound machine facts). `docs/00-diagnosis.md`
+  and `docs/90-letter.md` moved wholesale to new `archive/` — docs/ now holds only
+  uniform universal statutes; the archive keeps founding-era facts as dated
+  history, never as current truth (relocation note appended to each; content
+  otherwise untouched, per the append-only rule). README slimmed: plugin-update
+  mechanics, OpenCode/Codex/Hermes wiring, and the bare-checkout guide moved
+  verbatim into new `INSTALL.md`. Cross-references updated (CLAUDE.md v2.7,
+  docs/10 v2.9, docs/15 v1.4, docs/40 v2.12; zh mirrors synced); lint.sh drops
+  the now-orphaned docs/00|90 cap exemption. Same-category stray caught by the
+  verifier: floor-test.sh's usage example hardcoded the founding machine's proxy
+  and model id — genericized to the ollama default + a BINDINGS pointer.
+
 ## [2.6.1] — 2026-07-08
 - "Fresh context" gets an explicit definition (docs/10 v2.8 §6, mirrored in the
   dispatching and judgment cards): a different agent OR an objective tool run

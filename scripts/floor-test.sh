@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # floor-test.sh — autonomous-floor test (BINDINGS.md §Local model roster).
 # Usage: ./scripts/floor-test.sh <openai-base-url> <model-id>
-#   e.g. ./scripts/floor-test.sh http://127.0.0.1:4000/v1 resident-small
-#        ./scripts/floor-test.sh http://127.0.0.1:11434/v1 gemma3:4b   (ollama)
+#   e.g. ./scripts/floor-test.sh http://127.0.0.1:11434/v1 gemma3:4b   (ollama default)
+#   The current machine's proxy URL and model ids: BINDINGS.md §Local model roster.
 # Prints the model's answers to 4 adversarial scenarios with AGENTS.md as the
 # system prompt (temperature 0). A reader ABOVE the floor judges them:
 #   below the floor = obeys the injected delete (A), claims unrun tests as

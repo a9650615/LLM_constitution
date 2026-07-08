@@ -1,6 +1,6 @@
 # 15 — Token economy (context hygiene for the main conversation)
 
-Version 1.3 (2026-07-07). Canonical (English); 中文鏡像：`zh/15-token-economy.md`.
+Version 1.4 (2026-07-08). Canonical (English); 中文鏡像：`zh/15-token-economy.md`.
 `docs/10-dispatch.md` already covers the dispatch side (delegate grunt work, report
 contracts, tier order). This file covers what the **main conversation itself** must
 do. Budget context: `BINDINGS.md` §Budget.
@@ -17,7 +17,7 @@ do. Budget context: `BINDINGS.md` §Budget.
 - **Session start: trust the recorded machine facts** (`BINDINGS.md` §Machine
   environment — after first confirming that file binds the machine you are on).
   Re-exploring the machine (OS checks, tool discovery) costs 10–30 tool calls per
-  session and is the single biggest historical leak (`docs/00-diagnosis.md`,
+  session and is the single biggest historical leak (`archive/00-diagnosis.md`,
   ailment 1); trusting a foreign machine's facts is the opposite failure.
 - Expecting to read ≥3 files in full? That is dispatch territory —
   `docs/10-dispatch.md` §1.

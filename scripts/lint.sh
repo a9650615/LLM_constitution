@@ -45,7 +45,7 @@ if [ -n "$plugin" ]; then
     err "CHANGELOG.md has no entry for v$plugin (rule: docs/40 §7)"
 fi
 
-# 3. Size caps (docs/40 §4); archival docs/00 and docs/90 exempt.
+# 3. Size caps (docs/40 §4). Archival files live in archive/, outside these globs.
 # Guard every loop against dead globs/renames: a missing file is a FAIL, not a
 # silent skip — otherwise one directory rename deletes a whole check class.
 for f in CLAUDE.md AGENTS.md zh/CLAUDE.md; do
@@ -54,7 +54,6 @@ for f in CLAUDE.md AGENTS.md zh/CLAUDE.md; do
   [ "$n" -gt 80 ] && err "$f: $n lines (cap 80)"
 done
 for f in docs/[0-9]*.md zh/[0-9]*.md; do
-  case "$f" in docs/00-*|docs/90-*) continue ;; esac
   [ -f "$f" ] || { err "glob dead: $f matched no file"; continue; }
   n=$(wc -l < "$f")
   [ "$n" -gt 250 ] && err "$f: $n lines (cap 250)"
