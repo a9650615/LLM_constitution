@@ -6,6 +6,17 @@ changes that don't touch it). Every `plugin.json` bump ships with an entry here
 (lint-enforced). Backfilled 2026-07-07 from git history; commit hashes are the
 authoritative detail.
 
+## [2.7.1] — 2026-07-08
+- Universal content promoted out of the Chinese archive (user-identified gap):
+  the founding letter's degradation modes A–D existed only in `archive/90-letter.md`
+  (中文) while docs/40's header cited them — the universal layer depended on an
+  archival Chinese file for its own rationale. Now stated in English as docs/40
+  v2.13 §9 (silent bypass / rule inflation / lesson landfill / stale facts, each
+  with its counter-measure), with the archive kept as dated provenance. The three
+  ailments needed no promotion — their substance was already inlined in docs/10
+  §1/§5/§6 and docs/15 §1. zh/40 mirror synced (translated by a dispatched
+  standard-tier agent).
+
 ## [2.7.0] — 2026-07-08
 - Layout simplification (user-identified: the two archival files broke the
   universal docs/ format and carried era-bound machine facts). `docs/00-diagnosis.md`

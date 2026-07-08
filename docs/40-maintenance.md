@@ -1,9 +1,8 @@
 # 40 — Maintenance protocol: how to update this institution safely
 
-Version 2.12 (2026-07-08). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
+Version 2.13 (2026-07-08). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
 Audience: future models of any tier. The value of these files is *stable accumulation*;
-the biggest risk is well-meaning edits slowly ruining them (degradation modes:
-`archive/90-letter.md`).
+the biggest risk is well-meaning edits slowly ruining them (degradation modes: §9).
 
 ## 1. Before editing: snapshot
 
@@ -182,3 +181,26 @@ statute line, a card row):
    their own scenario is not acceptance (Law 4).
 3. Only then apply §5 (including its card-sync step). Law 10 still governs:
    additions that tip a file past its §4 cap are inflation, not tightening.
+
+## 9. Degradation modes (what this protocol defends against)
+
+The named failure modes this protocol exists to counter, ranked by danger
+(first stated in the founding letter, `archive/90-letter.md`, 中文):
+
+- **A. Silent bypass** (most dangerous — no immediate consequence): skipping the
+  verifier, the snapshot, or the read-back because "this one is simple". Every
+  bypass is fine until the one that isn't. Counter: the report contract forces a
+  written "verified to what degree" line (`docs/10` §4) — writing "unverified" in
+  plain sight is harder than complying; the user can spot-audit "who verified this".
+- **B. Rule inflation**: every incident adds a rule until the file outgrows what a
+  weak model can read — a constitution nobody finishes reading is no constitution.
+  Counter: hard size caps (§4); one-off incidents go to `LESSONS.md`, only
+  recurring patterns become statute (§3, §8).
+- **C. Lesson landfill**: low-value entries dilute `LESSONS.md` until scanning it
+  costs more than it saves, so nobody scans it. Counter: the format floor (§3 — no
+  entry without a wrong-way AND a right-way) plus the compaction trigger (§4).
+- **D. Stale facts mislead**: the environment moves, the files don't, and a model
+  that trusts a false recorded fact is worse off than one with no record at all.
+  Counter: perishable facts are quarantined in `BINDINGS.md` with re-verification
+  commands attached; the threshold for evidence-backed fact fixes is deliberately
+  the lowest in §2.
