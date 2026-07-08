@@ -6,6 +6,19 @@ changes that don't touch it). Every `plugin.json` bump ships with an entry here
 (lint-enforced). Backfilled 2026-07-07 from git history; commit hashes are the
 authoritative detail.
 
+## [2.5.1] — 2026-07-08
+- Cross-harness compatibility: new `.agents/skills/` directory with per-skill
+  symlinks into `skills/` — OpenCode and Codex discover the three cards
+  automatically inside the repo (agentskills.io standard location; verified
+  empirically against OpenCode 1.15.7 via `opencode debug skill`; whole-dir
+  symlinks are silently ignored, per-skill ones work). README gains an
+  "Other harnesses: OpenCode / Codex / Hermes" section covering AGENTS.md
+  auto-read on all three, global `~/.agents/skills/` install, and Hermes
+  per-skill tap install. Hermes has no single-command whole-bundle install
+  (its "plugin" concept is Python tool/hook code, confirmed against the
+  still-open obra/superpowers#1581); no shim built — content paths cover it
+  with zero new code and no code-exec trust flag.
+
 ## [2.5.0] — 2026-07-07
 - Universality fix (user-identified category error): CLAUDE.md v2.5 and
   AGENTS.md v2.7 no longer carry ANY machine facts — the Bazzite/proxy/install
