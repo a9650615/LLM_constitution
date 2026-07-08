@@ -1,6 +1,6 @@
 # 10 — Dispatch rules
 
-Version 2.6 (2026-07-07). Canonical (English); 中文鏡像：`zh/10-dispatch.md`.
+Version 2.7 (2026-07-08). Canonical (English); 中文鏡像：`zh/10-dispatch.md`.
 For the main conversation deciding: DIY or delegate, to whom, and how to accept the
 result. Prompt templates: `docs/30-templates.md`. "cheap / standard / strong" below are
 abstract tiers — today's concrete model names live in `BINDINGS.md`.
@@ -149,8 +149,8 @@ must switch contexts:
 ## 7. Spend discipline (authoritative thresholds — CLAUDE.md and `docs/20` R3 point here)
 
 - One subagent at a time is the norm. **≥3 parallel agents, or an expected multi-round
-  strong-tier engagement → ask the user first** (user's own words, 2026-07-03: "可以問我";
-  also recorded in memory `user-birdyo-profile`).
+  strong-tier engagement → ask the user first** (the user's grant of this
+  threshold is recorded in `BINDINGS.md` §User preferences).
 - Saving order: first "can we not dispatch at all" (§1 DIY list), then "can cheap do
   it", only then standard/strong.
 - **Verification is never skipped for savings**: §6 is the quality floor. Acceptance

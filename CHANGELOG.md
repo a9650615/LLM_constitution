@@ -6,6 +6,15 @@ changes that don't touch it). Every `plugin.json` bump ships with an entry here
 (lint-enforced). Backfilled 2026-07-07 from git history; commit hashes are the
 authoritative detail.
 
+## [2.6.0] — 2026-07-08
+- Universality sweep round 2 (user-identified stray): three user/machine-bound
+  facts still lived in universal files. `~/aipc-strix-halo` example dropped from
+  CLAUDE.md v2.6 §Conflicts (fact moved to BINDINGS §Machine environment);
+  AGENTS.md v2.8 title drops "on this machine" and the header no longer names
+  the LiteLLM proxy; docs/10 v2.7 §7 replaces the user quote + Mem0 key with a
+  pointer to BINDINGS §User preferences (grant recorded there). zh mirrors
+  synced; BINDINGS v2.6.
+
 ## [2.5.1] — 2026-07-08
 - Cross-harness compatibility: new `.agents/skills/` directory with per-skill
   symlinks into `skills/` — OpenCode and Codex discover the three cards

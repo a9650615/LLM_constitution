@@ -1,6 +1,6 @@
 # BINDINGS.md — Perishable specifics (expected to rot; fix freely with evidence)
 
-Version 2.5 (2026-07-07), last verified on Claude Code 2.1.200.
+Version 2.6 (2026-07-08), last verified on Claude Code 2.1.200.
 The constitution (`CLAUDE.md`, `docs/`) is written against abstract tiers and should
 survive years. This file binds those tiers to today's concrete names — it will NOT
 survive years, by design. **When reality disagrees with this file, reality wins**:
@@ -22,11 +22,18 @@ and docs are shared, bindings are per-machine.
   commands; prefer English paths under `$HOME` for new work.
 - **Local LLM proxy** `http://127.0.0.1:4000` (OpenAI-compatible). May be down —
   check first: `curl -s -m 3 http://127.0.0.1:4000/v1/models`
+- **`~/aipc-strix-halo`** — the user's core project (AI PC build scripts). It carries
+  its own `CLAUDE.md` role system, which wins inside that repo (CLAUDE.md
+  §Conflicts & exceptions). Moved here from CLAUDE.md 2026-07-08.
 
 ## User preferences (travel with the user, not the machine)
 
 - Reply to the user in **Traditional Chinese (zh-TW)**. Code, comments, and commit
   messages: English.
+- **Spend-threshold grant** behind `docs/10-dispatch.md` §7 (ask before ≥3 parallel
+  agents or a multi-round strong-tier engagement): user's own words, 2026-07-03,
+  「可以問我」. Also recorded in Mem0 memory `user-birdyo-profile`. Moved here from
+  docs/10 §7 2026-07-08.
 
 ## Model tiers → today's models (values for the Agent tool `model` param)
 

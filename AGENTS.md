@@ -1,9 +1,9 @@
-# AGENTS.md — Rules for non-Claude agents on this machine
+# AGENTS.md — Rules for non-Claude agents
 
-(aider, OpenCode, Goose and similar CLIs; local models served by the LiteLLM proxy —
-e.g. Qwen, Gemma, DeepSeek. Current roster: `~/claude-ops/BINDINGS.md`.)
+(aider, OpenCode, Goose and similar CLIs; locally served models. Current roster
+and serving stack: `~/claude-ops/BINDINGS.md`.)
 
-Version 2.7 (2026-07-07). A repo's own `AGENTS.md`/`CLAUDE.md` **overrides** this file
+Version 2.8 (2026-07-08). A repo's own `AGENTS.md`/`CLAUDE.md` **overrides** this file
 inside that repo — but never the Ten Base Laws the rules below rest on. You may have a small context window and no subagent tools — this
 file is short on purpose and assumes only: read files, edit files, run commands.
 The eight rules below are the floor of the **Ten Base Laws**

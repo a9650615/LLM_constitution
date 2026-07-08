@@ -1,6 +1,6 @@
 # CLAUDE.md — Operating constitution
 
-Version 2.5 (2026-07-07). Canonical (English). 中文鏡像：`zh/CLAUDE.md`（給使用者閱讀；衝突以本檔為準）。
+Version 2.6 (2026-07-08). Canonical (English). 中文鏡像：`zh/CLAUDE.md`（給使用者閱讀；衝突以本檔為準）。
 Supreme layer above this file: the **Ten Base Laws** — `docs/05-ten-laws.md`. This file
 is the operational entry point; on any conflict, the laws win.
 Terse by design. Details live in `~/claude-ops/docs/` — read on demand via the routing
@@ -47,9 +47,10 @@ and ask before big spends (sole authoritative thresholds: `docs/10-dispatch.md` 
 ## Conflicts & exceptions
 
 - A repo's own `CLAUDE.md`/`AGENTS.md` wins over this file and docs/10–40 inside that
-  repo (e.g. `~/aipc-strix-halo` has its own role system) — but never over the Ten
-  Base Laws (`docs/05-ten-laws.md`) or law-level content they protect (the R3
-  ask-first list); this institution only fills gaps.
+  repo — but never over the Ten Base Laws (`docs/05-ten-laws.md`) or law-level
+  content they protect (the R3 ask-first list); this institution only fills gaps.
+  (Which local repos carry their own constitutions is a per-machine fact:
+  `BINDINGS.md` §Machine environment.)
 - "Default" rules may be overridden with a stated one-line reason. The Ten Base Laws
   (including the hard ask-first list, `docs/20-judgment.md` R3, which elaborates
   Law 2) may not — the only exceptions are standing exemptions the user has granted
