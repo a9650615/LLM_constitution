@@ -14,6 +14,10 @@ The repo is self-hosting: `.claude-plugin/marketplace.json` lists the plugin wit
 `source: "./"`, so the same checkout serves as both the plugin and its own
 marketplace listing.
 
+After enabling the plugin, run `/rebind` once to generate this machine's
+`BINDINGS.md` from the shipped `BINDINGS.template.md` — the perishable layer
+(model names, budget, agent wiring) is per-machine and gitignored, not shipped.
+
 ## Updating an installed plugin
 
 Facts verified 2026-07-06 against code.claude.com/docs/en/discover-plugins and
@@ -71,7 +75,8 @@ back to the plugin root, so they work in either mode.
 2. `agents/*.md` copied to `~/.claude/agents/` (scout/verifier available
    everywhere); re-copy only when those files change.
 3. Non-Claude agents: `~/.aider.conf.yml` has a `read:` pointer to `AGENTS.md`
-   (literal path recorded in `BINDINGS.md` §Non-Claude agent wiring);
+   (literal path recorded in this machine's generated `BINDINGS.md` §Non-Claude
+   agent wiring — run `/rebind` first if that file doesn't exist yet);
    `~/.config/opencode/AGENTS.md` is a symlink to `AGENTS.md`. goose: not wired.
    OpenCode/Codex/Hermes: see "Other harnesses" above.
 4. Smoke test: open a fresh session anywhere, ask "what are your environment

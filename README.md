@@ -58,7 +58,9 @@ Precedence, top to bottom — a lower layer never overrides a higher one:
    through an explicit protocol (proposal → user approval → fresh-context read-back).
 2. **`CLAUDE.md`** — operational entry point: routing table and three of the laws
    restated for fast loading. Universal by design — machine facts live in
-   `BINDINGS.md`, which names the one machine it binds.
+   `BINDINGS.md`, a per-machine file generated from `BINDINGS.template.md` via
+   `/rebind` (not shipped; may not exist yet on a fresh checkout) that names the
+   one machine it binds.
 3. **`docs/10–40`** — operational statutes: dispatch, token economy, judgment,
    templates, maintenance. Defaults, overridable with a stated one-line reason —
    except the sections marked as law-elaborations, which may only be tightened.
@@ -73,7 +75,8 @@ Models may tighten the institution on their own; only the human may loosen it.
 |---|---|
 | `docs/05-ten-laws.md` | the Ten Base Laws — the supreme layer; everything else is subordinate |
 | `CLAUDE.md` | master operational constitution (auto-loaded every Claude session) |
-| `BINDINGS.md` | perishable bindings: tier→model names, effort mechanics, budget, local model roster, agent wiring |
+| `BINDINGS.md` | per-machine, generated (gitignored, not shipped): tier→model names, effort mechanics, budget, local model roster, agent wiring. Run `/rebind` to create it |
+| `BINDINGS.template.md` | shipped skeleton for `BINDINGS.md` — copy and fill every placeholder locally |
 | `AGENTS.md` | the eight-rule floor constitution for non-Claude agents (aider/OpenCode/goose and local models — Qwen/Gemma/DeepSeek, see BINDINGS.md) |
 | `docs/10-dispatch.md` | dispatch rules: delegate-vs-DIY, tiers, escalation ladder, verify-never-self-verify, spend discipline |
 | `docs/15-token-economy.md` | context hygiene for the main conversation: reading/output/tool-call discipline, long-context checkpointing, what never to economize |

@@ -148,3 +148,17 @@ floor-test.sh against the proxy before trusting any of them autonomously.
 - Custom agents deployed: `ls ~/.claude/agents/`
 - OS still Bazzite/immutable: `head -4 /etc/os-release; command -v rpm-ostree`
 - Claude Code surface (models/params) changed: ask the `claude-code-guide` agent
+
+## Relocation note (2026-07-09)
+
+This is the founding machine's `BINDINGS.md` snapshot, moved here from the repo
+root when `BINDINGS.md` became a per-machine generated file (a published plugin
+must not ship one machine's facts, nor the §Standing exemptions push
+pre-authorization, to every installer). Current truth for any machine — including
+this one — lives in that machine's own generated `BINDINGS.md`, never in this
+archive: see `BINDINGS.template.md` (repo root) and the `/rebind` command. The
+founding machine can restore this snapshot as its live file with:
+
+```bash
+cp archive/BINDINGS-founding-machine.md BINDINGS.md
+```

@@ -9,7 +9,10 @@ re-verified. Do that now.
 Steps:
 
 1. Locate it: `~/claude-ops/BINDINGS.md` if it exists, else `BINDINGS.md` at this
-   plugin's root. Read it in full.
+   plugin's root. If neither exists, create `BINDINGS.md` from `BINDINGS.template.md`
+   (plugin root): copy the skeleton, then fill every placeholder by verifying
+   locally — never by copying another machine's values (e.g. the archive
+   snapshot). Read it in full.
 
 2. Run its own "Quick re-verification commands" section, plus check each concrete
    claim you can test cheaply (paths exist? proxy answers? deployed agent files

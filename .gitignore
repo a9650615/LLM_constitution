@@ -1,1 +1,3 @@
 backups/
+# per-machine, generated from BINDINGS.template.md via /rebind
+/BINDINGS.md

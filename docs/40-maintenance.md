@@ -1,6 +1,6 @@
 # 40 — Maintenance protocol: how to update this institution safely
 
-Version 2.13 (2026-07-08). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
+Version 2.14 (2026-07-09). Canonical (English); 中文鏡像：`zh/40-maintenance.md`.
 Audience: future models of any tier. The value of these files is *stable accumulation*;
 the biggest risk is well-meaning edits slowly ruining them (degradation modes: §9).
 
@@ -147,10 +147,11 @@ not here.
   version stamp — the mirror header names the version it mirrors, so lag stays
   visible. **Never edit a zh mirror alone.** A session may regenerate any mirror from
   the canonical file on request.
-- `archive/` (`00-diagnosis.md`, `90-letter.md`) is archival Chinese: append-only
-  (handoff notes), never translated, never rewritten. Era-bound machine facts may
-  stay there as dated history — never in `docs/`, and never as current truth
-  (current truth lives only in `BINDINGS.md`).
+- `archive/` is append-only dated history, never rewritten: founding Chinese notes
+  (`00-diagnosis.md`, `90-letter.md`; handoff notes, never translated) AND dated
+  per-machine bindings snapshots (e.g. `BINDINGS-founding-machine.md`). Era-bound
+  machine facts may stay there as dated history — never in `docs/`, and never as
+  current truth (current truth = the machine's own generated `BINDINGS.md`).
 
 ## 7. Version stamps
 
